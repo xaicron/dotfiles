@@ -1,0 +1,10 @@
+escape ^z^z
+scrollback 10000
+defscrollback 9999
+
+autodetach on
+startup_message off
+
+shelltitle "$ | zsh"
+hardstatus alwayslastline "[%02c] %`%-w%{=b bw}%n %t%{-}%+w"
+
