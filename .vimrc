@@ -1,7 +1,6 @@
 if has('gui_macvim')
     set showtabline=2
     set imdisable
-"    set transparency=10
     set antialias
     set guifont=Monaco:h14
     colorscheme macvim
@@ -52,8 +51,12 @@ set softtabstop=4
 set shiftwidth=4
 set backspace=indent,eol,start
 
-filetype plugin on
-"filetype plugin indent off
+" 全角スペースの表示
+highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+match ZenkakuSpace /　/
+
+"filetype plugin on
+"filetype indent off
 syntax on
 
 "ヘルプファイル
@@ -76,9 +79,6 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 "psgiにperl syntaxを適用
 :au BufEnter *.psgi execute ":setlocal filetype=perl"
 
-"CF用コメントハイライト有効
-:let html_wrong_comments=1
-
 "TT用syntax
 :au BufEnter *.tt,*.cfm execute ":setlocal filetype=html"
 
@@ -94,15 +94,10 @@ set exrc
 noremap  
 noremap!  
 
-"perltidy 
-map ,pt <ESC>:%! perltidy<CR>
-map ,ptv <ESC>:%'<, '>! perltidy<CR>
-
 ":w + !perl command
 map <F4>  :w !perl<CR>
 "!perl command
 map <F5>  :!perl %<CR>
-
 
 "lhs comments
 map ,# :s/^/#/<CR>
