@@ -36,6 +36,7 @@ alias la='ll -a'
 
 alias minisync='minicpan -r http://ftp.yz.yamagata-u.ac.jp/pub/lang/cpan/ -l ~/minicpan'
 alias gvim='env LANG=ja_JP.UTF-8 open -a /Applications/MacVim.app "$@"'
+alias cpan-uninstall='\perl -MExtUtils::Install -MExtUtils::Installed -e "unshift@ARGV,new ExtUtils::Installed;sub a{\@ARGV};uninstall((eval{a->[0]->packlist(a->[1])}||do{require CPAN;a->[0]->packlist(CPAN::Shell->expandany(a->[1])->distribution->base_id=~m/(.*)-[^-]+$/)})->packlist_file,1,a->[2])"'
 
 # set path
 export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH
