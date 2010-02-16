@@ -55,15 +55,15 @@ set backspace=indent,eol,start
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 match ZenkakuSpace /　/
 
-"filetype plugin on
-"filetype indent off
+filetype plugin on
+filetype indent on
 syntax on
 
 "ヘルプファイル
 helptags $HOME/.vim/doc
 
 "ファイルタイプ別辞書ファイル
-autocmd FileType c,cpp,perl set cindent
+"autocmd FileType c,cpp,perl set cindent
 autocmd FileType ruby :set dictionary=~/.vim/plugin/ruby.vim
 autocmd FileType perl :set dictionary+=~/.vim/dict/perl_function.dict
 autocmd FileType perl :compiler perl
@@ -94,27 +94,30 @@ set exrc
 noremap  
 noremap!  
 
+"reset highlight
+nmap  :nohlsearch<CR>
+
 ":w + !perl command
 map <F4>  :w !perl<CR>
 "!perl command
 map <F5>  :!perl %<CR>
 
 "lhs comments
-map ,# :s/^/#/<CR>
-map ,/ :s/^/\/\//<CR>
-map ,> :s/^/> /<CR>
-map ," :s/^/\"/<CR>
-map ,% :s/^/%/<CR>
-map ,! :s/^/!/<CR>
-map ,; :s/^/;/<CR>
-map ,- :s/^/--/<CR>
-map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>
+map ,# :s/^/#/<CR>
+map ,/ :s/^/\/\//<CR>
+map ,> :s/^/> /<CR>
+map ," :s/^/\"/<CR>
+map ,% :s/^/%/<CR>
+map ,! :s/^/!/<CR>
+map ,; :s/^/;/<CR>
+map ,- :s/^/--/<CR>
+map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>
 
 "wrapping comments
-map ,* :s/^\(.*\)$/\/\* \1 \*\//<CR>
-map ,( :s/^\(.*\)$/\(\* \1 \*\)/<CR>
-map ,< :s/^\(.*\)$/<!-- \1 -->/<CR>
-map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR> 
+map ,* :s/^\(.*\)$/\/\* \1 \*\//<CR>
+map ,( :s/^\(.*\)$/\(\* \1 \*\)/<CR>
+map ,< :s/^\(.*\)$/<!-- \1 -->/<CR>
+map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>
 
 
 
@@ -136,6 +139,8 @@ map <C-j> <C-W>j<C-w>_
 map <C-k> <C-W>k<C-w>_
 map <C-h> <C-w>h<C-w>_
 map <C-l> <C-w>l<C-w>_
+
+"insert mode key mapping
 
 " <Tab> is bound to `complete'
 "inoremap <tab> <c-p>
