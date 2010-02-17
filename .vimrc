@@ -23,7 +23,7 @@ set title
 set laststatus=2
 
 "if(){}などのインデント
-set cindent
+"set cindent
 
 "ルーラーを表示
 set ruler
@@ -38,10 +38,10 @@ set incsearch
 set showmode
 
 "コマンドラインの履歴の保存数
-set history=256
+set history=1024
 "インデント
-set autoindent
-set smartindent
+"set autoindent
+"set smartindent
 set smarttab
 
 set tabstop=4
@@ -56,7 +56,7 @@ highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 match ZenkakuSpace /　/
 
 filetype plugin on
-filetype indent on
+"filetype indent off
 syntax on
 
 "ヘルプファイル
