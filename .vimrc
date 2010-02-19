@@ -106,7 +106,7 @@ map <F4>  :w !perl<CR>
 map <F5>  :!perl %<CR>
 
 "全選択
-map <F8> :ggVG
+map <F8> ggVG
 
 "lhs comments
 map ,# :s/^/#/<CR>
