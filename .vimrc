@@ -98,29 +98,32 @@ noremap  
 noremap!  
 
 "reset highlight
-nmap  :nohlsearch<CR>
+nmap  :nohlsearch<CR>
 
 ":w + !perl command
 map <F4>  :w !perl<CR>
 "!perl command
 map <F5>  :!perl %<CR>
 
+"全選択
+map <F8> :ggVG
+
 "lhs comments
-map ,# :s/^/#/<CR>
-map ,/ :s/^/\/\//<CR>
-map ,> :s/^/> /<CR>
-map ," :s/^/\"/<CR>
-map ,% :s/^/%/<CR>
-map ,! :s/^/!/<CR>
-map ,; :s/^/;/<CR>
-map ,- :s/^/--/<CR>
-map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>
+map ,# :s/^/#/<CR>
+map ,/ :s/^/\/\//<CR>
+map ,> :s/^/> /<CR>
+map ," :s/^/\"/<CR>
+map ,% :s/^/%/<CR>
+map ,! :s/^/!/<CR>
+map ,; :s/^/;/<CR>
+map ,- :s/^/--/<CR>
+map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>
 
 "wrapping comments
-map ,* :s/^\(.*\)$/\/\* \1 \*\//<CR>
-map ,( :s/^\(.*\)$/\(\* \1 \*\)/<CR>
-map ,< :s/^\(.*\)$/<!-- \1 -->/<CR>
-map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>
+map ,* :s/^\(.*\)$/\/\* \1 \*\//<CR>
+map ,( :s/^\(.*\)$/\(\* \1 \*\)/<CR>
+map ,< :s/^\(.*\)$/<!-- \1 -->/<CR>
+map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>
 
 
 
