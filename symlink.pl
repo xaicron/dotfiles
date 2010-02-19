@@ -28,18 +28,18 @@ for my $file (readdir $dh) {
     next if $file =~ /^\.{1,2}$|^\.git$|^[^.]/;
     my $is_write = 1;
     if (-e $file) {
-        if ($force) {
-            unlink $file if -f _;
-            rmtree $file if -d _;
-        }
-        else {
+        unless ($force) {
             print colored ['yellow bold'], "want diff ? $file [y/n] : ";
             $ipc->run('diff', '-u', "$Bin/$file", "$file") if yesno();
             print colored ['red bold'], "override ? $file [y/n] : ";
             $is_write = yesno()
         }
     }
-    symlink "$Bin/$file", $file if $is_write;
+    if ($is_write) {
+        unlink $file if -f _;
+        rmtree $file if -d _;
+        symlink "$Bin/$file", $file if $is_write;
+    }
 }
 closedir $dh;
 
