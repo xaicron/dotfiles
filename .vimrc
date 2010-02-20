@@ -45,7 +45,7 @@ set smartindent
 set smarttab
 
 "ペースト
-set paste
+"set paste
 
 set tabstop=4
 "タブを空白に置き換える
@@ -107,6 +107,13 @@ map <F5>  :!perl %<CR>
 
 "全選択
 map <F8> ggVG
+
+"paste from clipboard
+if has('mac') && !has('gui')
+    nmap ,p :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+elseif has('linux') && !has('gui')
+    nmap ,p :set paste<CR>:r !xsel -o -b<CR>:set nopaste<CR>
+endif
 
 "lhs comments
 map ,# :s/^/#/<CR>
