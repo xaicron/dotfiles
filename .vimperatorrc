@@ -1,0 +1,52 @@
+echo ".vimperatorrc loading..."
+
+" ビープを無効化
+set visualbell
+
+" ページ全体で検索語を強調表示
+set hlsearch
+
+" メニューの表示設定
+set guioptions=rb
+
+" OSのショートカットの互換
+inoremap <C-a> <C-v><C-a>
+inoremap <C-z> <C-v><C-z>
+inoremap <C-x> <C-v><C-x>
+inoremap <C-c> <C-v><C-c>
+inoremap <C-v> <C-v><C-v>
+cnoremap <C-a> <C-v><C-a>
+cnoremap <C-z> <C-v><C-z>
+cnoremap <C-x> <C-v><C-x>
+cnoremap <C-c> <C-v><C-c>
+cnoremap <C-v> <C-v><C-v>
+
+" 移動量を変更
+map j 3<C-e>
+map k 3<C-y>
+
+" Ctrl + ↑↓ で画面単位のスクロール
+map <C-Down> <C-f>
+map <C-Up>   <C-b>
+
+" BS で戻る
+map <BS> <A-Left>
+
+" Ctrl + ←→ でtab移動
+map <C-Left>  <C-p>
+map <C-Right> <C-n>
+
+" Shift + ←→ で tab 入れ替え
+map <S-Left>  :tabmove! -1<CR>
+map <S-Right> :tabmove! +1<CR>
+
+" <A-r> で FireFox を再起動
+map <A-r> :restart<CR>
+
+" C-t で新規 tab
+map <C-t> gH
+
+" 新規タブでアドオンを開く
+" map <C-S-a> <C-t>:addons<CR>
+
+echo "done."
