@@ -5,6 +5,8 @@ defscrollback 9999
 autodetach on
 startup_message off
 
+vbell off
+
 shelltitle "$ | zsh"
 hardstatus alwayslastline "[%02c] %`%-w%{=b bw}%n %t%{-}%+w"
 
