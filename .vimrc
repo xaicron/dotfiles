@@ -92,7 +92,7 @@ set complete+=k
 set exrc
 
 "バッファを開いた時に、カレントディレクトリを自動で移動
-:au BufEnter *.pl,*.pm,*.cgi,*.yaml,*.json execute ":lcd " . expand("%:p:h")
+:au BufEnter *.pl,*.pm,*.cgi,*.yaml,*.json,*.psgi execute ":lcd " . expand("%:p:h")
 
 noremap  
 noremap!  
