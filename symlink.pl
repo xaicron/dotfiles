@@ -30,7 +30,7 @@ for my $file (readdir $dh) {
     if (-e $file) {
         unless ($force) {
             print colored ['yellow bold'], "want diff ? $file [y/n] : ";
-            $ipc->run('diff', '-u', "$Bin/$file", "$file") if yesno();
+            $ipc->run('diff', '-u', "$file", "$Bin/$file") if yesno();
             print colored ['red bold'], "override ? $file [y/n] : ";
             $is_write = yesno()
         }
