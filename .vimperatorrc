@@ -2,12 +2,13 @@ echo ".vimperatorrc loading..."
 
 " ビープを無効化
 set visualbell
+highlight Bell display:none
 
 " ページ全体で検索語を強調表示
 set hlsearch
 
 " メニューの表示設定
-set guioptions=rb
+set guioptions=rbm
 
 " OSのショートカットの互換
 inoremap <C-a> <C-v><C-a>
@@ -40,13 +41,13 @@ map <C-Right> <C-n>
 map <S-Left>  :tabmove! -1<CR>
 map <S-Right> :tabmove! +1<CR>
 
-" <A-r> で FireFox を再起動
-map <A-r> :restart<CR>
+" .vimperatorrcを再読み込み
+map ,s :so ~/.vimperatorrc<CR> 
 
 " C-t で新規 tab
 map <C-t> gH
 
 " 新規タブでアドオンを開く
-" map <C-S-a> <C-t>:addons<CR>
+map <C-S-a> <C-t>:addons<CR>
 
 echo "done."
