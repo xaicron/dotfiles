@@ -28,6 +28,7 @@ for my $file (readdir $dh) {
     next if $file =~ /^\.{1,2}$|^\.git$|^[^.]/;
     my $is_write = 1;
     if (-e $file) {
+        next if -l $file;
         unless ($force) {
             print colored ['yellow bold'], "want diff ? $file [y/n] : ";
             $ipc->run('diff', '-u', "$home/$file", "$Bin/$file") if yesno();
