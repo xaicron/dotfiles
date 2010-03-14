@@ -110,9 +110,12 @@ map <F8> ggVG
 
 "paste from clipboard
 if has('mac') && !has('gui')
-    nmap ,p :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
-elseif has('linux') && !has('gui')
-    nmap ,p :set paste<CR>:r !xsel -o -b<CR>:set nopaste<CR>
+    nmap <S-p> :r !pbpaste<CR>
+    vmap <S-p> :r !pbpaste<CR>
+    nmap <S-y> :w !pbcopy<CR>
+    vmap <S-y> :w !pbcopy<CR>
+elseif has('unix') && !has('gui')
+    nmap <Space>p :set paste<CR>:r !xsel -o -b<CR>:set nopaste<CR>
 endif
 
 "lhs comments
@@ -170,10 +173,6 @@ map <m-p> :cp<cr>
 " ===================================================================
 " Word dictionary & Comment Usefull function keys.
 " ===================================================================
-" Insert mode commands( user dictionary words ) -
-iab === # =========================================================================
-iab --- # -------------------------------------------------------------------------
-
 " Template Toolkit用
 iab TS    [% %]
 iab Ts    [% etc %]

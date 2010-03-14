@@ -27,7 +27,7 @@ setopt share_history
 # prompt
 PROMPT="%B%{$fg[cyan]%}[%D %*] %#%{$fg[default]%}%b "
 RPROMPT="%B[%{$fg[white]%}%/%{$fg[default]%}]%b"
-SPROMPT="%B%{$fg[red]%}zsh: correct '%R' to '%r' [nyae]? : %{$fg[default]%}%b"
+SPROMPT="%B%{$fg[default]%}zsh: correct '%{$fg[red]%}%R%{$fg[default]%}' to '%{$fg[green]%}%r%{$fg[default]%}' [nyae]? : %{$fg[default]%}%b"
 
 # alias
 #alias ls='ls -G -w'
@@ -36,7 +36,7 @@ alias la='ll -a'
 
 alias minisync='minicpan -r http://ftp.yz.yamagata-u.ac.jp/pub/lang/cpan/ -l ~/minicpan'
 alias gvim='env LANG=ja_JP.UTF-8 open -a /Applications/MacVim.app "$@"'
-alias cpan-uninstall='\perl -MExtUtils::Install -MExtUtils::Installed -e "unshift@ARGV,new ExtUtils::Installed;sub a{\@ARGV};uninstall((eval{a->[0]->packlist(a->[1])}||do{require CPAN;a->[0]->packlist(CPAN::Shell->expandany(a->[1])->distribution->base_id=~m/(.*)-[^-]+$/)})->packlist_file,1,a->[2])"'
+alias module-version="perl -MUNIVERSAL::require -e '\$_->require&&printf\"%s %s\n\",\$_,\$_->VERSION for@ARGV'"
 
 # set path
 export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH
@@ -49,9 +49,13 @@ export LSCOLORS=DxGxcxdxCxegedabagacad
 
 # perl path
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
+export PERL_CPANM_DEV=1
 
 # ruby path
 export RUBYLIB=$HOME/.gem/ruby/1.9.1/lib
+
+# pboard関連
+export __CF_USER_TEXT_ENCODING='0x1F5:0x08000100:14'
 
 # path uniq
 PATH=$(perl -e '%h; print join ":", grep { !$h{$_}++ } split /:/, $ENV{PATH}')
