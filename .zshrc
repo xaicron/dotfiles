@@ -60,6 +60,9 @@ export PERL_CPANM_DEV=1
 # git env
 export GIT_EDITOR=vi
 
+# general env
+export EDITOR=vi
+
 # screen
 if [ "$TERM" = "screen" ]; then
     chpwd () { echo -n "_`dirs`\\" }
