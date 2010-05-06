@@ -1,64 +1,64 @@
-export LANG=ja_JP.UTF-8
-case ${UID} in
-0)
-    LANG=C
-    ;;
-esac
-
 # function path
 fpath=($HOME/.zsh/func $fpath)
 
-autoload -U compinit
+autoload -Uz compinit
 compinit
+autoload -Uz colors
+colors
+
+# options
 setopt auto_pushd
 setopt auto_cd
 setopt correct
 setopt cdable_vars
+setopt complete_aliases
+setopt list_packed
+setopt pushd_ignore_dups
 
-autoload colors
-colors
+# completions
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*:default' menu select=3
 
+# history
 export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=10000
-setopt hist_ignore_dups
+setopt hist_ignore_all_dups
 setopt share_history
 
+# key binds
+bindkey -v
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+
 # prompt
-PROMPT="%B%{$fg[cyan]%}[%D %*] %#%{$fg[default]%}%b "
-RPROMPT="%B[%{$fg[white]%}%/%{$fg[default]%}]%b"
-SPROMPT="%B%{$fg[default]%}zsh: correct '%{$fg[red]%}%R%{$fg[default]%}' to '%{$fg[green]%}%r%{$fg[default]%}' [nyae]? : %{$fg[default]%}%b"
+export PROMPT="%B%{$fg[cyan]%}[%D %*] %#%{$fg[default]%}%b "
+export RPROMPT="%B[%{$fg[white]%}%/%{$fg[default]%}]%b"
+export SPROMPT="%B%{$fg[default]%}zsh: correct '%{$fg[red]%}%R%{$fg[default]%}' to '%{$fg[green]%}%r%{$fg[default]%}' [nyae]? : %{$fg[default]%}%b"
 
 # alias
-#alias ls='ls -G -w'
+alias ls='ls -vF'
+if [ $OSTYPE = "linux-gnu" ]; then
+    alias ls='ls -vF --color=auto'
+fi
 alias ll='ls -l'
 alias la='ll -a'
-
-alias minisync='minicpan -r http://ftp.yz.yamagata-u.ac.jp/pub/lang/cpan/ -l ~/minicpan'
-alias gvim='env LANG=ja_JP.UTF-8 open -a /Applications/MacVim.app "$@"'
-alias module-version="perl -MUNIVERSAL::require -e '\$_->require&&printf\"%s %s\n\",\$_,\$_->VERSION for@ARGV'"
-
-# set path
-export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin:$PATH
-export PATH=$PATH:$HOME/.gem/ruby/1.9.1/bin
-export MANPATH=/usr/local/man:/opt/local/man:$MANPATH
 
 # set color
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
 
 # perl path
-eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
+source ~/perl5/perlbrew/etc/bashrc
+
+# perl env
 export PERL_CPANM_DEV=1
 
-# ruby path
-export RUBYLIB=$HOME/.gem/ruby/1.9.1/lib
-
-# pboard関連
-export __CF_USER_TEXT_ENCODING='0x1F5:0x08000100:14'
-
-# path uniq
-PATH=$(perl -e '%h; print join ":", grep { !$h{$_}++ } split /:/, $ENV{PATH}')
+# git env
+export GIT_EDITOR=vi
 
 # screen
 if [ "$TERM" = "screen" ]; then
@@ -98,4 +98,12 @@ if [ "$TERM" = "screen" ]; then
     }
     chpwd
 fi
+
+# load local setting
+if [ -f ~/.zsh_local ]; then
+    source ~/.zsh_local
+fi
+
+# uniq path
+typeset -U path
 
