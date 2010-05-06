@@ -3,3 +3,5 @@
 	email = xaicron@gmail.com
 [color]
 	ui = true
+[alias]
+	show-graph = log --graph --abbrev-commit --pretty=oneline
