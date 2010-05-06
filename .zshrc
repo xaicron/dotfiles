@@ -1,3 +1,11 @@
+# set lang
+export LANG=ja_JP.UTF-8
+case ${UID} in
+0)
+    LANG=C
+    ;;
+esac
+
 # function path
 fpath=($HOME/.zsh/func $fpath)
 
