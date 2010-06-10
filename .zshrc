@@ -59,6 +59,10 @@ alias la='ll -a'
 # set color
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
+if [ -f ~/.dir_colors ]; then
+    eval `dircolors -b ~/.dir_colors`
+fi
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # perl path
 if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
