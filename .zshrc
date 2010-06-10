@@ -35,12 +35,13 @@ setopt hist_ignore_all_dups
 setopt share_history
 
 # key binds
-bindkey -v
+bindkey -e
 zmodload zsh/complist
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
+#bindkey -v
+#bindkey -M menuselect 'h' vi-backward-char
+#bindkey -M menuselect 'j' vi-down-line-or-history
+#bindkey -M menuselect 'k' vi-up-line-or-history
+#bindkey -M menuselect 'l' vi-forward-char
 
 # prompt
 export PROMPT="%B%{$fg[cyan]%}[%D %*] %#%{$fg[default]%}%b "
