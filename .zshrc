@@ -59,8 +59,8 @@ alias la='ll -a'
 # set color
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
-export CLI_COLOR=$CLICOLOR
-export LS_COLORS=$LSCOLORS
+#export CLI_COLOR=$CLICOLOR
+#export LS_COLORS=$LSCOLORS
 if [ -f ~/.dir_colors ]; then
     eval `dircolors -b ~/.dir_colors`
 fi
