@@ -37,6 +37,13 @@ setopt share_history
 # key binds
 bindkey -e
 zmodload zsh/complist
+bindkey "^?"    backward-delete-char
+bindkey "^H"    backward-delete-char
+bindkey "^[[3~" delete-char
+bindkey "^[[1~" beginning-of-line
+bindkey "^[[4~" end-of-line
+bindkey '^p'    history-beginning-search-backward
+bindkey '^n'    history-beginning-search-forward
 #bindkey -v
 #bindkey -M menuselect 'h' vi-backward-char
 #bindkey -M menuselect 'j' vi-down-line-or-history
