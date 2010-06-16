@@ -51,7 +51,16 @@ bindkey '^n'    history-beginning-search-forward
 #bindkey -M menuselect 'l' vi-forward-char
 
 # prompt
-export PROMPT="%B%{$fg[cyan]%}[%D %*] %#%{$fg[default]%}%b "
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' formats '%{$fg[red]%}(%s %b)%{$fg[default]%} '
+
+setopt prompt_subst
+precmd () {
+    LANG=en.UTF-8 vcs_info;
+    PROMPT="%B${vcs_info_msg_0_}%{$fg[cyan]%}[%D %*]%{$fg[cyan]%}%#%{$fg[default]%}%b "
+}
+#export PROMPT="%B${vcs_info_msg_0_}%{$fg[cyan]%}[%D %*] %#%{$fg[default]%}%b "
 export RPROMPT="%B[%{$fg[white]%}%/%{$fg[default]%}]%b"
 export SPROMPT="%B%{$fg[default]%}zsh: correct '%{$fg[red]%}%R%{$fg[default]%}' to '%{$fg[green]%}%r%{$fg[default]%}' [nyae]? : %{$fg[default]%}%b"
 
