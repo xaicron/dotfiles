@@ -54,12 +54,12 @@ bindkey '^n'    history-beginning-search-forward
 
 # prompt
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn
-zstyle ':vcs_info:*' formats '%{$fg[red]%}(%s %b)%{$fg[default]%} '
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' formats '%{$fg[red]%}(%b)%{$fg[default]%} '
 
 setopt prompt_subst
 precmd () {
-    LANG=en.UTF-8 vcs_info;
+    LANG=C vcs_info;
     PROMPT="%B${vcs_info_msg_0_}%{$fg[cyan]%}[%D %*]%{$fg[cyan]%}%#%{$fg[default]%}%b "
 }
 #export PROMPT="%B${vcs_info_msg_0_}%{$fg[cyan]%}[%D %*] %#%{$fg[default]%}%b "
