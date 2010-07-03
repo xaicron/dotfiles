@@ -3,17 +3,17 @@
 use strict;
 use warnings;
 use autodie;
-use opts;
 use FindBin qw/$Bin/;
 use File::Path qw/rmtree/;
+use Getopt::Long qw/GetOptions/;
 use Pod::Usage qw/pod2usage/;
 use IPC::Open3::Simple;
 use Term::ANSIColor qw/colored/;
 
-opts
-    my $force => { isa => 'Bool' },
-    my $help  => { isa => 'Bool' },
-;
+GetOptions(
+    'f|force!' => \my $force,
+    'h|help!'  => \my $help,
+) or pod2usage 1;
 pod2usage 1 if $help;
 
 die '$ENV{HOME} not set' unless $ENV{HOME};
@@ -31,9 +31,9 @@ for my $file (readdir $dh) {
         next if -l $file;
         unless ($force) {
             print colored ['yellow bold'], "want diff ? $file [y/n] : ";
-            $ipc->run('diff', '-u', "$home/$file", "$Bin/$file") if yesno();
+            $ipc->run('diff', '-u', "$home/$file", "$Bin/$file") if yes();
             print colored ['red bold'], "override ? $file [y/n] : ";
-            $is_write = yesno()
+            $is_write = yes()
         }
     }
     if ($is_write) {
@@ -46,7 +46,7 @@ closedir $dh;
 
 print "done.\n";
 
-sub yesno {
+sub yes {
     my $answer = <>;
     chomp $answer;
     return $answer =~ /[yY]/ ? 1 : 0;
