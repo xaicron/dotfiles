@@ -54,6 +54,11 @@ set softtabstop=4
 set shiftwidth=4
 set backspace=indent,eol,start
 
+" バックアップディレクトリを変更
+set backup
+set backupdir=$HOME/.vim-backup
+let &directory = &backupdir
+
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 match ZenkakuSpace /　/
@@ -92,7 +97,7 @@ set complete+=k
 set exrc
 
 "バッファを開いた時に、カレントディレクトリを自動で移動
-:au BufEnter *.pl,*.pm,*.cgi,*.yaml,*.json,*.psgi execute ":lcd " . expand("%:p:h")
+":au BufEnter *.pl,*.pm,*.cgi,*.yaml,*.json,*.psgi execute ":lcd " . expand("%:p:h")
 
 noremap  
 noremap!  
