@@ -77,11 +77,11 @@ alias la='ll -a'
 # set color
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
-#export CLI_COLOR=$CLICOLOR
-#export LS_COLORS=$LSCOLORS
-if [ -f ~/.dir_colors ]; then
-    eval `dircolors -b ~/.dir_colors`
+if [ ! -f ~/.dir_colors ]; then
+    dircolors -p > ~/.dir_colors
 fi
+eval `dircolors -b ~/.dir_colors`
+
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # perl path
