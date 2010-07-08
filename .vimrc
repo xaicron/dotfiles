@@ -85,7 +85,7 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
 "perl syntaxを適用
-:au BufEnter *.t,*.psgi *.perl execute ":setlocal filetype=perl"
+:au BufEnter *.t,*.psgi,*.perl execute ":setlocal filetype=perl"
 
 "TT用syntax
 :au BufEnter *.tt,*.cfm execute ":setlocal filetype=html"
