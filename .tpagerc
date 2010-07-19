@@ -1,0 +1,4 @@
+define author = xaicron
+define email  = xaicron {at} capn.org
+
+eval_perl
