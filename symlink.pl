@@ -5,6 +5,7 @@ use warnings;
 use autodie;
 use FindBin qw/$Bin/;
 use File::Path qw/rmtree/;
+use File::Basename qw/basename/;
 use Getopt::Long qw/GetOptions/;
 use Pod::Usage qw/pod2usage/;
 use IPC::Open3::Simple;
@@ -25,10 +26,11 @@ my $ipc = IPC::Open3::Simple->new(out => sub { print "$_[0]\n" }, err => sub { w
 
 opendir my($dh), $Bin;
 for my $file (readdir $dh) {
-    next if $file =~ /^\.{1,2}$|^\.git$|^[^.]/;
+    next if $file =~ /^\.{1,2}$|^\.git$/;
+    next if $file eq basename $0;
     my $is_write = 1;
     if (-e $file) {
-        next if -l $file;
+        next if -l _;
         unless ($force) {
             print colored ['yellow bold'], "want diff ? $file [y/n] : ";
             $ipc->run('diff', '-u', "$home/$file", "$Bin/$file") if yes();
