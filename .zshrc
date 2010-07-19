@@ -98,6 +98,9 @@ export GIT_EDITOR=vi
 # general env
 export EDITOR=vi
 
+# PATH
+export PATH=$HOME/bin:$PATH
+
 # screen
 #if [ "$TERM" = "screen" ]; then
 #    chpwd () { echo -n "_`dirs`\\" }
