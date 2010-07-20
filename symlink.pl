@@ -30,7 +30,7 @@ for my $file (readdir $dh) {
     next if $file eq basename $0;
     my $is_write = 1;
     if (-e $file) {
-        next if -l _;
+        next if -l $file;
         unless ($force) {
             print colored ['yellow bold'], "want diff ? $file [y/n] : ";
             $ipc->run('diff', '-u', "$home/$file", "$Bin/$file") if yes();
