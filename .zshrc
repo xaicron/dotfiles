@@ -77,10 +77,13 @@ alias la='ll -a'
 # set color
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
-if [ ! -f ~/.dir_colors ]; then
-    dircolors -p > ~/.dir_colors
+which dircolors > /dev/null
+if [ $? -eq 0 ]; then
+    if [ ! -f ~/.dir_colors ]; then
+        dircolors -p > ~/.dir_colors
+    fi
+    eval `dircolors -b ~/.dir_colors`
 fi
-eval `dircolors -b ~/.dir_colors`
 
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
@@ -91,6 +94,7 @@ fi
 
 # perl env
 export PERL_CPANM_DEV=1
+export PERL_CPANM_OPT='--skip-installed'
 
 # git env
 export GIT_EDITOR=vi
