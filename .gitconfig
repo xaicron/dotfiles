@@ -5,3 +5,5 @@
 	ui = true
 [alias]
 	show-graph = log --graph --abbrev-commit --pretty=oneline
+[github]
+	user = xaicron
