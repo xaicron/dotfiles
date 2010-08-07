@@ -1,0 +1,13 @@
+#!/usr/bin/env perl
+use 5.00801;
+use strict;
+use warnings;
+use Imager;
+
+my @cmd = qw/aview -reverse/;
+
+my $file = shift                        or die "usage: $0 image\n";
+my $img = Imager->new();
+$img->read( file => $file )             or die "$file:", $img->errstr;
+open my $ah, '|-', @cmd                 or die "aview:$!";
+$img->write( fh => $ah, type => 'pnm' ) or die $img->errstr;
