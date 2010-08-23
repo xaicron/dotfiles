@@ -7,6 +7,7 @@ use File::Path;
 use File::Spec;
 use Template;
 use YAML;
+use Config;
 
 my $path   = File::Spec->catfile($ENV{HOME}, "/.pmsetuprc");
 my $config = eval { YAML::LoadFile($path) } || {};
@@ -56,10 +57,11 @@ sub write_plugin_files {
         write_file($file, $tmpl->{template}, $vars);
     }
 
-    !system "perl Makefile.PL" or die $?;
-    !system 'make manifest' or die $?;
-    !system 'make test' or die $?;
-    !system 'make distclean' or die $?;
+    my $make = $Config{make} || 'make';
+    !system $^X, 'Makefile.PL' or die $?;
+    !system $make, 'manifest' or die $?;
+    !system $make, 'test' or die $?;
+    !system $make, 'distclean' or die $?;
 
     if ($git =~ /[yY]/) {
         !system "git init" or die $?;
