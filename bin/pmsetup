@@ -192,7 +192,7 @@ template: |
 
   =head1 COPYRIGHT
 
-  Copyright [% year %]- [% config.author %]
+  Copyright [% year %] - [% config.author %]
 
   =head1 LICENSE
 
