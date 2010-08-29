@@ -72,7 +72,7 @@ sub write_plugin_files {
         !system $^X, 'Makefile.PL' or die $?;
         !system $make, 'manifest' or die $?;
         !system $make, 'test' or die $?;
-        !system $make, 'distclean' or die $?;
+        !system $make, 'realclean' or die $?;
     }
 }
 
