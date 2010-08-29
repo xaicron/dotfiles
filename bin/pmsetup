@@ -35,8 +35,6 @@ END {
 sub write_plugin_files {
     my($module, $config) = @_;
 
-    my $git = prompt("git init? [yN]", 'y');
-
     # $module = "Foo::Bar"
     # $dist   = "Foo-Bar"
     # $path   = "Foo/Bar.pm"
@@ -57,14 +55,24 @@ sub write_plugin_files {
         write_file($file, $tmpl->{template}, $vars);
     }
 
-    my $make = $Config{make} || 'make';
-    !system $^X, 'Makefile.PL' or die $?;
-    !system $make, 'manifest' or die $?;
-    !system $make, 'test' or die $?;
-    !system $make, 'distclean' or die $?;
+    if (lc prompt("git init? [yN]", 'y') eq 'y') {
+        !system 'git', 'init' or die $?;
+        !system 'git', 'add', '.gitignore' or die $?;
 
-    if ($git =~ /[yY]/) {
-        !system "git init" or die $?;
+        opendir my $dh, '.' or die $!;
+        while (my $name = readdir $dh) {
+            next if $name =~ /^\.{1,2}$/ || $name eq '.git';
+            !system 'git', 'add', $name or die $?;
+        }
+        !system 'git', 'commit', '-m', 'initial commit' or die $?;
+    }
+
+    if (lc prompt("make test? [yN]", 'y') eq 'y') {;
+        my $make = $Config{make} || 'make';
+        !system $^X, 'Makefile.PL' or die $?;
+        !system $make, 'manifest' or die $?;
+        !system $make, 'test' or die $?;
+        !system $make, 'distclean' or die $?;
     }
 }
 
