@@ -128,29 +128,70 @@ template: |
 
   BEGIN { use_ok '[% module %]' }
 ---
-file: xt/pod.t
+file: xt/01_podspell.t
 template: |
   use strict;
   use warnings;
   use Test::More;
+
+  eval q{ use Test::Spelling; !system qw(which spell) or die };
+  plan skip_all => "Test::Spelling and spell(1) are not available." if $@;
+
+  add_stopwords(map { split /[\s\:\-]/ } <DATA>);
+  $ENV{LANG} = 'C';
+  all_pod_files_spelling_ok('lib');
+
+  __DATA__
+  [% module %]
+
+  # personal section
+  [% config.author %]
+  [% config.email %]
+---
+file: xt/02_pod.t
+template: |
+  use strict;
+  use warnings;
+  use Test::More;
+
   eval "use Test::Pod 1.00";
   plan skip_all => "Test::Pod 1.00 required for testing POD" if $@;
+
   all_pod_files_ok();
 ---
-file: xt/perlcritic.t
+file: xt/03_pod-coverage.t
 template: |
   use strict;
   use warnings;
   use Test::More;
-  unless ($ENV{PERLCRITIC}) {
-      plan skip_all => "\$ENV{PERLCRITIC} not set.";
+
+  unless ($ENV{TEST_POD_COVERAGE}) {
+      plan skip_all => "\$ENV{TEST_POD_COVERAGE} is not set.";
       exit;
   }
+
+  eval "use Test::Pod::Coverage 1.04";
+  plan skip_all => "Test::Pod::Coverage 1.04 required for testing POD coverage" if $@;
+
+  all_pod_coverage_ok({also_private => [qw(unimport BUILD DEMOLISH)]});
+---
+file: xt/04_perlcritic.t
+template: |
+  use strict;
+  use warnings;
+  use Test::More;
+
+  unless ($ENV{TEST_PERLCRITIC}) {
+      plan skip_all => "\$ENV{TEST_PERLCRITIC} is not set.";
+      exit;
+  }
+
   eval {
       require Test::Perl::Critic;
       Test::Perl::Critic->import( -profile => 'xt/perlcriticrc');
   };
   plan skip_all => "Test::Perl::Critic is not installed." if $@;
+
   all_critic_ok('lib');
 ---
 file: xt/perlcriticrc
