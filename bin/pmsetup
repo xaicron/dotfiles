@@ -5,9 +5,9 @@ use ExtUtils::MakeMaker qw(prompt);
 use File::Basename;
 use File::Path;
 use File::Spec;
-use Template;
 use YAML;
 use Config;
+use Text::Xslate;
 
 my $path   = File::Spec->catfile($ENV{HOME}, "/.pmsetuprc");
 my $config = eval { YAML::LoadFile($path) } || {};
@@ -90,8 +90,8 @@ sub write_file {
         File::Path::mkpath($dir, 1, 0777);
     }
 
-    my $tt = Template->new;
-    $tt->process(\$template, $vars, \my $content);
+    my $tx = Text::Xslate->new(syntax => 'TTerse', cache => 0);
+    my $content = $tx->render_string($template, $vars);
 
     warn "Creating $path\n";
     open my $out, ">:raw", $path or die "$path: $!";
