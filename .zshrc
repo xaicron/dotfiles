@@ -74,6 +74,11 @@ fi
 alias ll='ls -l'
 alias la='ll -a'
 
+which colordiff > /dev/null 
+if [ $? -eq 0 ]; then
+    alias diff='colordiff'
+fi
+
 # set color
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
