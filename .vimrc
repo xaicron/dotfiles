@@ -92,6 +92,7 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 
 "辞書ファイルを使用する設定に変更
 set complete+=k
+set complete-=i
 
 "Vroom
 set exrc
