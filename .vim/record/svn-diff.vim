@@ -1,0 +1,1 @@
+{"generated_by":"Vimana-2010.09303","installer_type":"text","version":0.3,"files":[{"checksum":"30c046a7eb59b5bfb646970c9a36a549","file":"/home/xaicron/.vim/ftplugin/svn.vim"}],"package":"svn-diff.vim"}
