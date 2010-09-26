@@ -109,8 +109,8 @@ template: |
 
   #requires '';
   
-  build_requires 'Test::More', 0.96;
-  #test_requires 'Test::Requires';
+  #build_requires '';
+  test_requires 'Test::More', 0.96;
   
   tests_recursive 't';
   author_tests 'xt';
