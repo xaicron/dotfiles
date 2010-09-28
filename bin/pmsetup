@@ -205,7 +205,7 @@ template: |
   Revision history for Perl extension [% module %]
 
   0.01  [% localtime %]
-          - original version
+      - original version
 ---
 file: lib/$path
 template: |
