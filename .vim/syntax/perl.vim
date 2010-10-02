@@ -136,7 +136,7 @@ syn keyword perlTodo			TODO TBD FIXME XXX contained
 
 " Special variables first ($^A, ...) and ($|, $', ...)
 syn match  perlVarPlain		 "$^[ADEFHILMOPSTWX]\="
-syn match  perlVarPlain		 "$[\\\"\[\]'&`+*.,;=%~?@$<>(-]"
+syn match  perlVarPlain		 "$[\\\"\[\]'&`+*.,;=%~!?@#$<>(-]"
 syn match  perlVarPlain		 "$\(0\|[1-9][0-9]*\)"
 " Same as above, but avoids confusion in $::foo (equivalent to $main::foo)
 syn match  perlVarPlain		 "$:[^:]"
