@@ -108,6 +108,7 @@ export GIT_EDITOR=vi
 export EDITOR=vi
 
 # PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$HOME/bin:$PATH
 
 # screen
