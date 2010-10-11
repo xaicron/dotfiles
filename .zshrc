@@ -61,6 +61,7 @@ setopt prompt_subst
 precmd () {
     LANG=C vcs_info;
     PROMPT="%B${vcs_info_msg_0_}%{$fg[cyan]%}[%D %*]%{$fg[cyan]%}%#%{$fg[default]%}%b "
+    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && PROMPT="%B%{$fg[white]%}(${USER}@${HOST%%.*}) ${PROMPT}"
 }
 #export PROMPT="%B${vcs_info_msg_0_}%{$fg[cyan]%}[%D %*] %#%{$fg[default]%}%b "
 export RPROMPT="%B[%{$fg[white]%}%/%{$fg[default]%}]%b"
