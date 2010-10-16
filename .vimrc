@@ -148,7 +148,8 @@ map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>
 " ===================================================================
 " Buffer commands (split,move,delete) -
 " this makes a little more easy to deal with buffers.
-map <F6>  :split<C-M>
+map <F6> :split<C-M>
+map <F7> :vsp<C-M>
 "map <F6>  :bp<C-M>
 "map <F7>  :bn<C-M>
 "map <F8> :bd<C-M>
