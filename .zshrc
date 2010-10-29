@@ -67,6 +67,12 @@ precmd () {
 export RPROMPT="%B[%{$fg[white]%}%/%{$fg[default]%}]%b"
 export SPROMPT="%B%{$fg[default]%}zsh: correct '%{$fg[red]%}%R%{$fg[default]%}' to '%{$fg[green]%}%r%{$fg[default]%}' [nyae]? : %{$fg[default]%}%b"
 
+# cdd
+source ~/.zsh/etc/cdd
+function chpwd() {
+    _reg_pwd_screennum
+}
+
 # alias
 alias ls='ls -vF'
 if [ $OSTYPE = "linux-gnu" ]; then
