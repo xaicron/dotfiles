@@ -95,6 +95,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # perl path
 if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
+    export PATH=perl5/perlbrew/bin:$PATH
     source ~/perl5/perlbrew/etc/bashrc
 fi
 
