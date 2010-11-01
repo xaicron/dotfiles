@@ -41,8 +41,12 @@
 #
 
 if [ "$TMUX" != "" ]; then
-    export CDD_PWD_FILE=~/.zsh/cdd_pwd_list.$(echo $TMUX | cut -d ',' -f 2)
-    export WINDOW=`tmux respawn-window 2>&1 > /dev/null | cut -d ':' -f 3`
+    export CDD_PWD_FILE=~/.zsh/cdd_pwd_list.$(echo $TMUX | cut -d ',' -f 3)
+
+    export WINDOW=$(tmux respawn-window 2>&1 > /dev/null | cut -d ':' -f 3)
+    if [ "$WINDOW" = "" ]; then
+        export WINDOW=$(tmux respawn-window > /dev/null | cut -d ':' -f 3)
+    fi
 fi
 
 function _reg_pwd_screennum() {
