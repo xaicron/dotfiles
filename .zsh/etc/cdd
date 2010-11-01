@@ -75,15 +75,7 @@ function _cdadd {
   fi
 
   local -A real_path
-  if which realpath >/dev/null 2>&1;then
-    real_path=`realpath $2`
-  else
-    if which ruby >/dev/null 2>&1;then
-      real_path=`ruby -rpathname -e "puts Pathname.new('$2').realpath"`
-    else
-      echo "cdd add require realpath or ruby"
-    fi
-  fi
+  real_path=$(perl -MCwd -e 'print Cwd::realpath("$2")');
   echo "add $1:$real_path"
   _reg_cdd_pwd "$1" "$real_path"
 }
