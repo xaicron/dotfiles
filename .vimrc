@@ -84,11 +84,10 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
-"perl syntaxを適用
+" syntax
 :au BufEnter *.t,*.psgi,*.perl execute ":setlocal filetype=perl"
-
-"TT用syntax
 :au BufEnter *.tt,*.cfm execute ":setlocal filetype=html"
+:au BufEnter *.sql execute ":setlocal filetype=mysql"
 
 "辞書ファイルを使用する設定に変更
 set complete+=k
