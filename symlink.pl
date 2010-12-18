@@ -41,7 +41,8 @@ for my $file (readdir $dh) {
     if ($is_write) {
         unlink $file if -f _;
         rmtree $file if -d _;
-        symlink "$Bin/$file", $file if $is_write;
+        symlink "$Bin/$file", $file;
+        chmod 0600, $file if ($file eq '.pause');
     }
 }
 closedir $dh;
