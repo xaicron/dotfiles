@@ -115,7 +115,6 @@ template: |
   tests join q{ }, map { sprintf 't%s.t', '/*' x $_ } 1..3;
   author_tests 'xt';
   
-  auto_include();
   auto_set_repository();
   
   WriteAll;
