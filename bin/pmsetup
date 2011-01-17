@@ -139,7 +139,7 @@ template: |
 
   my %cmd_map = (
       spell  => 'spell',
-      aspell => 'aspell list',
+      aspell => 'aspell list -l en',
       ispell => 'ispell -l',
   );
 
