@@ -175,3 +175,11 @@ nnoremap <C-p> :bp<CR>
 map <m-n> :cn<cr>
 map <m-p> :cp<cr>
 
+if filereadable(expand('~/.vim/source/auto_encoding'))
+    source ~/.vim/source/auto_encoding
+endif
+
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
+
