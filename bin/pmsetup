@@ -332,6 +332,7 @@ template: |
   inc
   pm_to_blib
   MANIFEST
+  MANIFEST.bak
   Makefile.old
   nytprof*
   ppport.h
