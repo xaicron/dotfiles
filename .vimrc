@@ -59,10 +59,11 @@ set backup
 set backupdir=$HOME/.vim-backup
 let &directory = &backupdir
 
-" 全角スペースの表示
-highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
-match ZenkakuSpace /　/
+" 全角スペースとタブの表示
+highlight WhiteSpace cterm=underline ctermfg=lightblue guibg=darkgray
+match WhiteSpace /[	　]/
 
+" syntax
 filetype plugin on
 filetype indent on
 syntax on
