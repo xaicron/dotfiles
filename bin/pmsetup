@@ -172,9 +172,7 @@ template: |
   use strict;
   use warnings;
   use Test::More;
-
-  eval "use Test::Pod 1.00";
-  plan skip_all => "Test::Pod 1.00 required for testing POD" if $@;
+  use Test::Requires { 'Test::Pod' => 1.00 };
 
   all_pod_files_ok();
 ---
@@ -183,14 +181,12 @@ template: |
   use strict;
   use warnings;
   use Test::More;
+  use Test::Requires { 'Test::Pod::Coverage' => 1.04 };
 
   unless ($ENV{TEST_POD_COVERAGE}) {
       plan skip_all => "\$ENV{TEST_POD_COVERAGE} is not set.";
       exit;
   }
-
-  eval "use Test::Pod::Coverage 1.04";
-  plan skip_all => "Test::Pod::Coverage 1.04 required for testing POD coverage" if $@;
 
   all_pod_coverage_ok({also_private => [qw(unimport BUILD DEMOLISH)]});
 ---
@@ -199,17 +195,14 @@ template: |
   use strict;
   use warnings;
   use Test::More;
+  use Test::Requires { 'Test::Perl::Critic' => 1.02 };
 
   unless ($ENV{TEST_PERLCRITIC}) {
       plan skip_all => "\$ENV{TEST_PERLCRITIC} is not set.";
       exit;
   }
 
-  eval {
-      require Test::Perl::Critic;
-      Test::Perl::Critic->import( -profile => 'xt/perlcriticrc');
-  };
-  plan skip_all => "Test::Perl::Critic is not installed." if $@;
+  Test::Perl::Critic->import( -profile => 'xt/perlcriticrc');
 
   all_critic_ok('lib');
 ---
