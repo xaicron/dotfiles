@@ -44,6 +44,9 @@ set autoindent
 set smartindent
 set smarttab
 
+"置換に正規表現を使えるようにする
+set magic
+
 "ペースト
 "set paste
 
