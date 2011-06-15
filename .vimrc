@@ -110,9 +110,9 @@ noremap!  
 nmap  :nohlsearch<CR>
 
 ":w + !perl command
-map <F4>  :w !perl<CR>
+map <F4>  :w !perl -Ilib<CR>
 "!perl command
-map <F5>  :!perl %<CR>
+map <F5>  :!perl -Ilib %<CR>
 
 "全選択
 map <F8> ggVG
