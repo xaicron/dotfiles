@@ -210,7 +210,8 @@ file: xt/05_script-shebang.t
 template: |
   use strict;
   use warnings;
-  use Test::More;use Test::Requires 'Test::Script::Shebang';
+  use Test::More;
+  use Test::Requires 'Test::Script::Shebang';
   use File::Find qw/find/;
   
   my @files;
