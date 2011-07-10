@@ -303,6 +303,7 @@ template: |
   \.shipit
   \.gitignore
   \ppport.h
+  ^MYMETA\.
 ---
 file: README
 template: |
