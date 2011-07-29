@@ -343,7 +343,7 @@ template: |
 file: .gitignore
 template: |
   cover_db
-  MYMETA.yml
+  MYMETA.*
   META.yml
   Makefile
   blib
