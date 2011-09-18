@@ -321,6 +321,9 @@ template: |
   you should just be able to do
 
       % cpan [% module %]
+  or
+
+      % cpanm [% module %]
 
   Download it, unpack it, then build it as per the usual:
 
