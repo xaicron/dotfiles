@@ -57,7 +57,7 @@ sub write_plugin_files {
         write_file($file, $tmpl->{template}, $vars);
     }
 
-    if (lc prompt("git init? [yN]", 'y') eq 'y') {
+    if (lc prompt("git init? (y/n)", 'y') eq 'y') {
         !system 'git', 'init' or die $?;
         !system 'git', 'add', '.gitignore' or die $?;
 
@@ -69,7 +69,7 @@ sub write_plugin_files {
         !system 'git', 'commit', '-m', 'initial commit' or die $?;
     }
 
-    if (lc prompt("make test? [yN]", 'y') eq 'y') {;
+    if (lc prompt("make test? (y/n)", 'y') eq 'y') {;
         my $make = $Config{make} || 'make';
         !system $^X, 'Makefile.PL' or die $?;
         !system $make, 'manifest' or die $?;
@@ -82,7 +82,7 @@ sub write_file {
     my($path, $template, $vars) = @_;
 
     if (-e $path) {
-        my $ans = prompt("$path exists. Override? [yN] ", 'n');
+        my $ans = prompt("$path exists. Override? (y/n)", 'n');
         return if $ans !~ /[Yy]/;
     }
 
