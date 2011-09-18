@@ -42,8 +42,10 @@ sub write_plugin_files {
     my $dist = join "-", @pkg;
     my $path = join("/", @pkg) . ".pm";
 
-    mkdir $dist, 0777;
-    chdir $dist;
+    my $dist_dir = sprintf 'p5-%s', $dist;
+
+    mkdir $dist_dir, 0777;
+    chdir $dist_dir;
 
     my @template = YAML::Load(join '', <DATA>);
     my $vars = { module => $module, dist => $dist, path => $path,
