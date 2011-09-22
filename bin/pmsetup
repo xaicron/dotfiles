@@ -1,25 +1,25 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use ExtUtils::MakeMaker qw(prompt);
 use File::Basename;
 use File::Path;
 use File::Spec;
 use YAML;
 use Config;
 use Text::Xslate;
+use IO::Prompt::Simple qw(prompt);
 
 my $path   = File::Spec->catfile($ENV{HOME}, "/.pmsetuprc");
 my $config = eval { YAML::LoadFile($path) } || {};
 
 my $save;
 while (! $config->{author}) {
-    $config->{author} = prompt("Your name: ", '');
+    $config->{author} = prompt 'Your name';
     $save++;
 }
 
 while (! $config->{email}) {
-    $config->{email} = prompt("Your email: ", '');
+    $config->{email} = prompt 'Your email';
     $save++;
 }
 
@@ -64,7 +64,7 @@ sub write_plugin_files {
         write_file($file, $tmpl->{template}, $vars);
     }
 
-    if (lc prompt("git init? (y/n)", 'y') eq 'y') {
+    if (prompt "git init?", { yn => 1, default => 'y' }) {
         !system 'git', 'init' or die $?;
         !system 'git', 'add', '.gitignore' or die $?;
 
@@ -76,7 +76,7 @@ sub write_plugin_files {
         !system 'git', 'commit', '-m', 'initial commit' or die $?;
     }
 
-    if (lc prompt("make test? (y/n)", 'y') eq 'y') {;
+    if (prompt "make test?", { yn => 1, default => 'y' }) {
         my $make = $Config{make} || 'make';
         !system $^X, 'Makefile.PL' or die $?;
         !system $make, 'manifest' or die $?;
@@ -89,7 +89,7 @@ sub write_file {
     my($path, $template, $vars) = @_;
 
     if (-e $path) {
-        my $ans = prompt("$path exists. Override? (y/n)", 'n');
+        my $ans = prompt "$path exists. Override?", { yn => 1, default => 'n' };
         return if $ans !~ /[Yy]/;
     }
 
