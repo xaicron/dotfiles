@@ -98,6 +98,8 @@ if [ $? -eq 0 ]; then
     alias diff='colordiff'
 fi
 
+alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
+
 # set color
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
