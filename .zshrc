@@ -125,6 +125,7 @@ export GIT_EDITOR=vi
 
 # general env
 export EDITOR=vi
+export PAGER=less
 
 # PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
