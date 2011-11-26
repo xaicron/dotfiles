@@ -1,16 +1,3 @@
-if has('gui_macvim')
-    set showtabline=2
-    set imdisable
-    set antialias
-    set guifont=Monaco:h14
-    colorscheme macvim
-endif
-
-if has('gui_running')
-    set fuoptions=maxvert,maxhorz
-    au GUIEnter * set fullscreen
-endif
-
 "行番号を非表示
 set number
 "括弧入力時に対応する括弧を表示
