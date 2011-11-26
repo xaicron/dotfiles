@@ -8,7 +8,8 @@ set lines=50
 set showtabline=2
 set imdisable
 set antialias
-set guifont=Monaco:h17
+set guifont=Monaco:h15
 set shiftwidth=1
-set guioptions=T
-colorscheme desert 
+ set guioptions=T
+" set transparency=75
+colorscheme koehler
