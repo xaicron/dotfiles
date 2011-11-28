@@ -1,6 +1,6 @@
+term screen-256color
 escape ^z^z
-scrollback 10000
-defscrollback 9999
+defscrollback 10000
 
 autodetach on
 startup_message off
@@ -8,5 +8,6 @@ startup_message off
 vbell off
 
 shelltitle "$ | zsh"
-hardstatus alwayslastline "[%02c] %`%-w%{=b bw}%n %t%{-}%+w"
-
+sorendition "+rb .R"
+# hardstatus alwayslastline "%{=r kg}[%02c] %`%-w%{=b kw}%02n %t%{-}%+w"
+caption always "%{=r dg}%-Lw%40L>%?%F%{=b dw}%:[%? %n%f %t %?%F%{-}%:]%?%+Lw %?%F%-010=GNU Screen%:%=%?"
