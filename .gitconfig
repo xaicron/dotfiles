@@ -6,5 +6,6 @@
 [alias]
 	show-graph = log --graph --abbrev-commit --pretty=oneline
 	co = checkout
+	tree = log --graph --pretty='format:%h %Cgreen%an%Creset | %s %Cred%d%Creset'
 [github]
 	user = xaicron
