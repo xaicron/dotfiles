@@ -19,7 +19,7 @@ setopt auto_pushd
 setopt auto_cd
 setopt correct
 setopt cdable_vars
-setopt complete_aliases
+#setopt complete_aliases
 setopt list_packed
 setopt list_types
 setopt pushd_ignore_dups
@@ -32,8 +32,11 @@ setopt magic_equal_subst
 setopt complete_in_word
 setopt always_last_prompt
 setopt print_eight_bit
-setopt extended_glob
+#setopt extended_glob
 setopt globdots
+setopt no_flow_control
+setopt rm_star_silent
+setopt noclobber
 
 # completions
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
