@@ -3,6 +3,7 @@ escape ^z^z
 defscrollback 10000
 
 autodetach on
+altscreen on
 startup_message off
 
 vbell off
