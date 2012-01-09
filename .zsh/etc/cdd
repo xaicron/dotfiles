@@ -58,7 +58,7 @@ fi
 function _reg_pwd_screennum() {
   if [ "$STY" != "" ] || [ "$TMUX" != "" ]; then
     if [ ! -f "$CDD_PWD_FILE" ]; then
-      echo "\n" >> "$CDD_PWD_FILE"
+      echo "\n" >>! "$CDD_PWD_FILE"
     fi
     _reg_cdd_pwd "$WINDOW" "$PWD"
   fi
