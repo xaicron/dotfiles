@@ -54,7 +54,7 @@ else
     export CDD_PWD_FILE=$CDD_BASE_DIR/default
 fi
 
-touch "$CDD_PWD_FILE" 2>&1 > /dev/null;
+echo "\n" >>! "$CDD_PWD_FILE";
 
 function _reg_pwd_screennum() {
   if [ "$STY" != "" ] || [ "$TMUX" != "" ]; then
