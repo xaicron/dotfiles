@@ -40,11 +40,10 @@
 # - Yuichi Tateno
 #
 
-CDD_BASE_DIR=~/.zsh/cdd
+CDD_BASE_DIR=$HOME/.zsh/cdd
 
 if [ "$TMUX" != "" ]; then
     export CDD_PWD_FILE=$CDD_BASE_DIR/tmux.$(echo $TMUX | cut -d ',' -f 3)
-
     export WINDOW=$(tmux respawn-window 2>&1 > /dev/null | cut -d ':' -f 3)
     if [ "$WINDOW" = "" ]; then
         export WINDOW=$(tmux respawn-window > /dev/null | cut -d ':' -f 3)
@@ -54,6 +53,8 @@ elif [ "$STY" != "" ]; then
 else
     export CDD_PWD_FILE=$CDD_BASE_DIR/default
 fi
+
+touch "$CDD_PWD_FILE" 2>&1 > /dev/null;
 
 function _reg_pwd_screennum() {
   if [ "$STY" != "" ] || [ "$TMUX" != "" ]; then
@@ -98,7 +99,6 @@ function _cddel() {
   sed -i".t" -e "/^$1:/d" "$CDD_PWD_FILE"
 }
 
-
 function cdd() {
   if [ "$1" = "add" ]; then
     shift
@@ -121,7 +121,6 @@ function cdd() {
     sed -e '/^$/d' "$CDD_PWD_FILE"
   fi
 }
-
 
 compctl -K _cdd cdd
 functions _cdd() {
