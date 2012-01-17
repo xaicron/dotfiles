@@ -74,10 +74,10 @@ zstyle ':vcs_info:*' formats '%b'
 autoload -Uz is-at-least
 if is-at-least 4.3.10; then
     zstyle ':vcs_info:git:*' check-for-changes true
-    zstyle ':vcs_info:git:*' stagedstr "+"
-    zstyle ':vcs_info:git:*' unstagedstr "-"
-    zstyle ':vcs_info:git:*' formats '%c%u:%b'
-    zstyle ':vcs_info:git:*' actionformats '%c%u:%b|%a'
+    zstyle ':vcs_info:git:*' stagedstr "+:"
+    zstyle ':vcs_info:git:*' unstagedstr "-:"
+    zstyle ':vcs_info:git:*' formats '%c%u%b'
+    zstyle ':vcs_info:git:*' actionformats '%c%u%b|%a'
 fi
 
 setopt prompt_subst
@@ -102,7 +102,7 @@ function _git_not_pushed() {
                 return 0
             fi
         done
-        echo "*"
+        echo "*:"
     fi
     return 0
 }
