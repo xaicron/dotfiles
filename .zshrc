@@ -70,15 +70,43 @@ bindkey '^n'    history-beginning-search-forward
 # prompt
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' formats '%{$fg[red]%}(%b)%{$fg[default]%} '
+zstyle ':vcs_info:*' formats '%b'
+autoload -Uz is-at-least
+if is-at-least 4.3.10; then
+    zstyle ':vcs_info:git:*' check-for-changes true
+    zstyle ':vcs_info:git:*' stagedstr "+"
+    zstyle ':vcs_info:git:*' unstagedstr "-"
+    zstyle ':vcs_info:git:*' formats '%c%u:%b'
+    zstyle ':vcs_info:git:*' actionformats '%c%u:%b|%a'
+fi
 
 setopt prompt_subst
-precmd () {
+function precmd () {
     LANG=C vcs_info;
-    PROMPT="%B${vcs_info_msg_0_}%{$fg[cyan]%}[%D %*]%{$fg[cyan]%}%#%{$fg[default]%}%b "
+    local _info=
+    if [ -n "$vcs_info_msg_0_" ]; then
+        local _not_pushed=$(_git_not_pushed);
+        _info="%{$fg[red]%}(${_not_pushed}${vcs_info_msg_0_})%{$fg[default]%} "
+    fi
+    PROMPT="%B${_info}%{$fg[cyan]%}[%D %*]%{$fg[cyan]%}%#%{$fg[default]%}%b "
     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && PROMPT="%B%{$fg[white]%}(${USER}@${HOST%%.*}) ${PROMPT}"
 }
-#export PROMPT="%B${vcs_info_msg_0_}%{$fg[cyan]%}[%D %*] %#%{$fg[default]%}%b "
+
+# TODO counting an ahead
+function _git_not_pushed() {
+    if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]; then
+        head="$(git rev-parse HEAD)"
+        for x in $(git rev-parse --remotes)
+        do
+            if [ "$head" = "$x" ]; then
+                return 0
+            fi
+        done
+        echo "*"
+    fi
+    return 0
+}
+
 export RPROMPT="%B[%{$fg[white]%}%/%{$fg[default]%}]%b"
 export SPROMPT="%B%{$fg[default]%}zsh: correct '%{$fg[red]%}%R%{$fg[default]%}' to '%{$fg[green]%}%r%{$fg[default]%}' [nyae]? : %{$fg[default]%}%b"
 
