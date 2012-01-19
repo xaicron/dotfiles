@@ -116,6 +116,11 @@ function chpwd() {
     _reg_pwd_screennum
 }
 
+# functions
+function reload() {
+    source ~/.zshrc
+}
+
 # alias
 alias ls='ls -vF'
 if [ $OSTYPE = "linux-gnu" ]; then
