@@ -8,5 +8,6 @@
 	co = checkout
 	tree = log --graph --pretty='format:%h %Cgreen%an%Creset | %s %Cred%d%Creset'
 	st = status -sb
+	ci = commit -v
 [github]
 	user = xaicron
