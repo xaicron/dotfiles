@@ -169,6 +169,11 @@ export PAGER=less
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$HOME/bin:$PATH
 
+# TMUX setting
+if [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && [ "$TMUX" != "" ]; then
+    tmux set-option status-bg colour26 > /dev/null 2>&1
+fi
+
 # screen
 #if [ "$TERM" = "screen" ]; then
 #    chpwd () { echo -n "_`dirs`\\" }
