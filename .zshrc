@@ -19,7 +19,7 @@ setopt auto_pushd
 setopt auto_cd
 setopt correct
 setopt cdable_vars
-#setopt complete_aliases
+setopt complete_aliases
 setopt list_packed
 setopt list_types
 setopt pushd_ignore_dups
