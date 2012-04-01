@@ -1,5 +1,5 @@
 "行番号を非表示
-set number
+set nonumber
 "括弧入力時に対応する括弧を表示
 set showmatch
 "コマンドをステータス行に表示
