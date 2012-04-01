@@ -167,7 +167,7 @@ export PAGER=less
 
 # PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin:$HOME/local/bin:$PATH
 
 # TMUX setting
 if [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && [ "$TMUX" != "" ]; then
