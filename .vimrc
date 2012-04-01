@@ -76,7 +76,7 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
 " syntax
-:au BufEnter *.t,*.psgi,*.perl execute ":setlocal filetype=perl"
+:au BufEnter *.t,*.psgi,*.perl,*.tra execute ":setlocal filetype=perl"
 :au BufEnter *.tt,*.cfm execute ":setlocal filetype=html"
 :au BufEnter *.sql execute ":setlocal filetype=mysql"
 
