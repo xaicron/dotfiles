@@ -1,0 +1,13 @@
+#compdef pm-uninstall
+
+_arguments -s \
+    '(-v --verbose)'{-v,--verbose}'[Turns on chatty output]' \
+    '(-f --force)'{-f,--force}'[Uninstalls without prompts]' \
+    '(-c --checkdeps)'{-c,--checkdeps}'[Check dependencies ( default on )]' \
+    '(-n --no-checkdeps)'{-n,--no-checkdeps}'[Not check dependencies]' \
+    '(-q --quiet)'{-q,--quiet}'[Suppress some messages]' \
+    '(-V --version)'{-V,--version}'[Show version]' \
+    '(-l --local-lib)'{-l,--local-lib=}'[Additional module path]' \
+    '(-L --local-lib-contained)'{-l,--local-lib-contained=}"[Additional module path (don't include non-core modules)]" \
+    '(-h --help)'{-h,--help}'[Show help message]' \
+    '*:file or directory:_files'
