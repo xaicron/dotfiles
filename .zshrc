@@ -80,8 +80,9 @@ if is-at-least 4.3.10; then
     zstyle ':vcs_info:git:*' actionformats '%c%u%b|%a'
 fi
 
+autoload -Uz add-zsh-hook
 setopt prompt_subst
-function precmd () {
+function _git_prompt () {
     LANG=C vcs_info;
     local _info=
     if [ -n "$vcs_info_msg_0_" ]; then
@@ -106,6 +107,8 @@ function _git_not_pushed() {
     fi
     return 0
 }
+
+add-zsh-hook precmd _git_prompt
 
 export RPROMPT="%B[%{$fg[white]%}%/%{$fg[default]%}]%b"
 export SPROMPT="%B%{$fg[default]%}zsh: correct '%{$fg[red]%}%R%{$fg[default]%}' to '%{$fg[green]%}%r%{$fg[default]%}' [nyae]? : %{$fg[default]%}%b"
