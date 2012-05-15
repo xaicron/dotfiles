@@ -10,6 +10,9 @@ set imdisable
 set antialias
 set guifont=Monaco:h15
 set shiftwidth=1
- set guioptions=T
+set guioptions=T
 " set transparency=75
 colorscheme koehler
+
+" workaround for 'yen' problem
+noremap ¥ \
