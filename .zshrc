@@ -158,8 +158,7 @@ if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
 fi
 
 # perl env
-export PERL_CPANM_DEV=1
-export PERL_CPANM_OPT='--skip-installed'
+export PERL_CPANM_OPT="--skip-installed"
 
 # git env
 export GIT_EDITOR=vi

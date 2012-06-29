@@ -1,0 +1,45 @@
+_jsx()
+{
+    local cur prev
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+    JSX_OPTIONS='\
+        --add-search-path\
+        --executable\
+        --run\
+        --test\
+        --output\
+        --mode\
+        --target\
+        --release\
+        --optimize\
+        --enable-type-check\
+        --enable-source-map\
+        --version\
+        --help'
+
+    case $prev in
+      --add-search-path)
+        COMPREPLY=($( compgen -d -- $cur ))
+        ;;
+      --output)
+        COMPREPLY=($( compgen -W "FILE" -- $cur ))
+        ;;
+      --mode)
+        COMPREPLY=($( compgen -W "compile parse" -- $cur ))
+        ;;
+      --target)
+        COMPREPLY=($( compgen -W "javascript c++" -- $cur ))
+        ;;
+      --optimize)
+        COMPREPLY=($( compgen -W "no-assert no-log inline return-if" -- $cur ))
+        ;;
+      *)
+        COMPREPLY=($( compgen -W "$JSX_OPTIONS" -- $cur ))
+        ;;
+    esac
+
+    return 0
+}
+complete -F _jsx $filenames jsx
