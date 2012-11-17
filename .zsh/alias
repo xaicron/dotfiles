@@ -1,0 +1,17 @@
+alias ls='ls -vF'
+if [ $OSTYPE = "linux-gnu" ]; then
+    alias ls='ls -vF --color=auto'
+fi
+alias ll='ls -l'
+alias la='ll -a'
+
+which colordiff > /dev/null 
+if [ $? -eq 0 ]; then
+    alias diff='colordiff'
+fi
+
+# for MacOS
+if [ `uname` = "Darwin" ]; then
+    # mac vim
+    alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
+fi
