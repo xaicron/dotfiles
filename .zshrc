@@ -141,10 +141,10 @@ fi
 export PERL_CPANM_OPT="--skip-installed"
 
 # git env
-export GIT_EDITOR=vi
+export GIT_EDITOR=vim
 
 # general env
-export EDITOR=vi
+export EDITOR=vim
 export PAGER=less
 
 # PATH
