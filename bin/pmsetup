@@ -337,6 +337,7 @@ template: |
   \.gitignore
   \ppport.h
   ^MYMETA\.
+  ^README.pod$
 
   # for Module::Build
   \bBuild$
@@ -376,6 +377,8 @@ template: |
   *~
   README
   LICENSE
+  Build
+  _build/*
 ---
 file: .proverc
 template: |
