@@ -12,6 +12,7 @@ use IO::Prompt::Simple qw(prompt);
 use Software::License;
 use Module::Build;
 use Term::ANSIColor qw(colored);
+
 my $path   = File::Spec->catfile($ENV{HOME}, "/.pmsetuprc");
 my $config = eval { YAML::LoadFile($path) } || {};
 
@@ -131,7 +132,6 @@ template: |
   my $build = Module::Build->new(
       license        => 'perl',
       dynamic_config => 0,
-      dist_abstract  => 'XXX',
 
       build_requires     => {
           'Test::More'     => '0.98',
@@ -292,7 +292,7 @@ template: |
 
   =head1 NAME
 
-  [% module %] -
+  [% module %] - blah blah blah
 
   =head1 SYNOPSIS
 
