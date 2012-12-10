@@ -114,31 +114,11 @@ add-zsh-hook precmd _git_prompt
 export RPROMPT="%B[%{$fg[white]%}%/%{$fg[default]%}]%b"
 export SPROMPT="%B%{$fg[default]%}zsh: correct '%{$fg[red]%}%R%{$fg[default]%}' to '%{$fg[green]%}%r%{$fg[default]%}' [nyae]? : %{$fg[default]%}%b"
 
-# cdd
-source ~/.zsh/etc/cdd
-function chpwd() {
-    _reg_pwd_screennum
-}
-
 # functions
-function reload() {
-    source ~/.zshrc
-}
+source ~/.zsh/functions
 
 # alias
-alias ls='ls -vF'
-if [ $OSTYPE = "linux-gnu" ]; then
-    alias ls='ls -vF --color=auto'
-fi
-alias ll='ls -l'
-alias la='ll -a'
-
-which colordiff > /dev/null 
-if [ $? -eq 0 ]; then
-    alias diff='colordiff'
-fi
-
-alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
+source ~/.zsh/alias
 
 # set color
 export CLICOLOR=1
@@ -162,10 +142,10 @@ fi
 export PERL_CPANM_OPT="--skip-installed"
 
 # git env
-export GIT_EDITOR=vi
+export GIT_EDITOR=vim
 
 # general env
-export EDITOR=vi
+export EDITOR=vim
 export PAGER="less -R"
 
 # PATH
