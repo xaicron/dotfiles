@@ -10,5 +10,6 @@ vbell off
 
 shelltitle "$ | zsh"
 sorendition "+rb .R"
-# hardstatus alwayslastline "%{=r kg}[%02c] %`%-w%{=b kw}%02n %t%{-}%+w"
-caption always "%{=r dg}%-Lw%40L>%?%F%{=b dw}%:[%? %n%f %t %?%F%{-}%:]%?%+Lw %?%F%-010=GNU Screen%:%=%?"
+hardstatus alwayslastline "%{=r kg}[%02c] (%`) %-w%{=b kw}%02n %t%{-}%+w"
+backtick 0 30 30 sh -c 'screen -ls | grep --color=no -o "$PPID[^[:space:]]*" | cut -d . -f 2'
+#caption always "%{=r dg}%-Lw%40L>%?%F%{=b dw}%:[%? %n%f %t %?%F%{-}%:]%?%+Lw %?%F%-010=GNU Screen%:%=%?"
