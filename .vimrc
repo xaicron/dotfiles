@@ -49,10 +49,6 @@ set backup
 set backupdir=$HOME/.vim-backup
 let &directory = &backupdir
 
-" 全角スペースとタブの表示
-highlight WhiteSpace cterm=underline ctermfg=lightblue guibg=darkgray
-match WhiteSpace /[	　]/
-
 " syntax
 filetype plugin on
 filetype indent on
@@ -86,6 +82,10 @@ set complete-=i
 
 "Vroom
 set exrc
+
+" 全角スペースとタブの表示
+highlight WhiteSpace cterm=underline ctermfg=lightblue guibg=darkgray
+match WhiteSpace /[	　]/
 
 "バッファを開いた時に、カレントディレクトリを自動で移動
 ":au BufEnter *.pl,*.pm,*.cgi,*.yaml,*.json,*.psgi execute ":lcd " . expand("%:p:h")
@@ -174,3 +174,5 @@ if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
 endif
 
+set list
+set lcs=nbsp:_,tab:>_,trail:_,extends:>,precedes:<
