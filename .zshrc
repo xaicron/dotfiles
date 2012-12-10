@@ -10,7 +10,7 @@ esac
 fpath=($HOME/.zsh/func $fpath)
 
 autoload -Uz compinit
-compinit
+compinit -u
 autoload -Uz colors
 colors
 
@@ -18,7 +18,7 @@ colors
 setopt auto_pushd
 setopt auto_cd
 setopt correct
-setopt cdable_vars
+#setopt cdable_vars
 setopt complete_aliases
 setopt list_packed
 setopt list_types
@@ -39,9 +39,10 @@ setopt rm_star_silent
 setopt noclobber
 
 # completions
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*' use-cache true
-zstyle ':completion:*:default' menu select=3
+#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+#zstyle ':completion:*' use-cache true
+#zstyle ':completion:*:match:*' original only
+#zstyle ':completion:*:default' menu select=3
 
 # history
 export HISTFILE=~/.zsh_history
@@ -72,11 +73,11 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' formats '%b'
 autoload -Uz is-at-least
-if is-at-least 4.3.10; then
+if is-at-least 4.3.1; then
     zstyle ':vcs_info:git:*' check-for-changes true
     zstyle ':vcs_info:git:*' stagedstr "+:"
     zstyle ':vcs_info:git:*' unstagedstr "-:"
-    zstyle ':vcs_info:git:*' formats '%c%u%b'
+    zstyle ':vcs_info:git:*' formats '%u%b'
     zstyle ':vcs_info:git:*' actionformats '%c%u%b|%a'
 fi
 
@@ -165,7 +166,7 @@ export GIT_EDITOR=vi
 
 # general env
 export EDITOR=vi
-export PAGER=less
+export PAGER="less -R"
 
 # PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
