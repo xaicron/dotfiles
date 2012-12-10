@@ -379,6 +379,7 @@ template: |
   LICENSE
   Build
   _build/*
+  Makefile.PL
 ---
 file: .proverc
 template: |
