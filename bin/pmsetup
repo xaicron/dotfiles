@@ -346,6 +346,7 @@ template: |
   \ppport.h
   ^MYMETA\.
   ^README.pod$
+  ^[% dist %]-
 
   # for Module::Build
   \bBuild$
