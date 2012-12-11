@@ -349,6 +349,7 @@ template: |
   ^[% dist %]-
 
   # for Module::Build
+  ^Makefile.PL$
   \bBuild$
   \b_build/
   \bBuild.bat$
