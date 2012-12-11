@@ -334,7 +334,7 @@ template: |
   \.svn/
   \.git/
   ^MANIFEST\.
-  ^Makefile$
+  ^Makefile
   ~$
   \.old$
   ^blib/
@@ -349,7 +349,6 @@ template: |
   ^[% dist %]-
 
   # for Module::Build
-  ^Makefile.PL$
   \bBuild$
   \b_build/
   \bBuild.bat$
