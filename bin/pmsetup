@@ -153,8 +153,8 @@ template: |
 
       meta_merge => {
           resources => {
-              repository => 'http://github.com/xaicron/p5-[% dist %]',
-              bugtracker => 'http://github.com/xaicron/p5-[% dist %]/issues',
+              repository => 'https://github.com/xaicron/p5-[% dist %]',
+              bugtracker => 'https://github.com/xaicron/p5-[% dist %]/issues',
           },
       },
 
