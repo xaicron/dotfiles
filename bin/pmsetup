@@ -27,6 +27,11 @@ while (! $config->{email}) {
     $save++;
 }
 
+while (! $config->{github}{username}) {
+    $config->{github}{username} = prompt 'Your github username';
+    $save++;
+}
+
 my $modname = shift @ARGV or die "Usage: pmsetup module\n";
    $modname =~ s/-/::/g;
 
@@ -153,8 +158,8 @@ template: |
 
       meta_merge => {
           resources => {
-              repository => 'https://github.com/xaicron/p5-[% dist %]',
-              bugtracker => 'https://github.com/xaicron/p5-[% dist %]/issues',
+              repository => 'https://github.com/[% config.github.username %]/p5-[% dist %]',
+              bugtracker => 'https://github.com/[% config.github.username %]/p5-[% dist %]/issues',
           },
       },
 
