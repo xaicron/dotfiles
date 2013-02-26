@@ -1,0 +1,14 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use feature 'say';
+
+my $hash = shift || die "Usage: git url-form-hash <sha1>\n";
+chomp($hash = `git rev-parse $hash`);
+exit $? if $?;
+
+chomp(my $remote = `git gh-url`);
+exit $? if $?;
+
+say sprintf '%s/commit/%s', $remote, $hash;
