@@ -20,3 +20,5 @@ autoload -Uz zmv
 alias zmv='noglob zmv -W'
 alias zcp='zmv -C'
 alias zln='zmv -L'
+
+alias mkdir='mkdir -p'
