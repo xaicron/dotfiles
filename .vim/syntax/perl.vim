@@ -199,7 +199,7 @@ syn cluster perlInterpDQ	contains=perlSpecialString,perlVarPlain,perlVarNotInMat
 " These items are interpolated inside '' strings and similar constructs.
 syn cluster perlInterpSQ	contains=perlSpecialStringU,perlSpecialStringU2
 " These items are interpolated inside m// matches and s/// substitutions.
-syn cluster perlInterpSlash	contains=perlSpecialString,perlSpecialMatch,perlVarPlain,perlVarBlock
+syn cluster perlInterpSlash    contains=perlSpecialString,perlSpecialMatch,perlVarPlain,perlVarBlock,perlComment
 " These items are interpolated inside m## matches and s### substitutions.
 syn cluster perlInterpMatch	contains=@perlInterpSlash,perlVarSlash
 
