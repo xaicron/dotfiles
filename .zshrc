@@ -146,7 +146,7 @@ export GIT_EDITOR=vim
 
 # general env
 export EDITOR=vim
-export PAGER="less -R"
+export PAGER=less
 
 # PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
