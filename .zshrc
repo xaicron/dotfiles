@@ -97,7 +97,7 @@ function _git_prompt () {
 # TODO counting an ahead
 function _git_not_pushed() {
     if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]; then
-        head="$(git rev-parse HEAD)"
+        head="$(git rev-parse HEAD 2>/dev/null)"
         for x in $(git rev-parse --remotes)
         do
             if [ "$head" = "$x" ]; then
