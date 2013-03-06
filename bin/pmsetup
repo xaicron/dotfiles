@@ -10,7 +10,7 @@ use Config;
 use Text::Xslate;
 use IO::Prompt::Simple qw(prompt);
 use Software::License;
-use Module::Build;
+use Module::Build::Pluggable::CPANfile;
 use Term::ANSIColor qw(colored);
 
 my $path   = File::Spec->catfile($ENV{HOME}, "/.pmsetuprc");
@@ -132,17 +132,14 @@ file: Build.PL
 template: |
   use strict;
   use warnings;
-  use Module::Build;
+  use Module::Build::Pluggable qw(CPANfile);
 
-  my $build = Module::Build->new(
+  my $build = Module::Build::Pluggable->new(
       license        => 'perl',
       dynamic_config => 0,
 
-      build_requires     => {
-          'Test::More'     => '0.98',
-          'Test::Requires' => '0.06',
-      },
-      configure_requires => { 'Module::Build' => '0.38' },
+      configure_requires => {},
+      build_requires     => {},
       requires           => {
           perl => '5.008001',
       },
@@ -168,6 +165,18 @@ template: |
   );
 
   $build->create_build_script();
+---
+file: cpanfile
+template: |
+  configure_requires 'Module::Build'                      => '0.40';
+  configure_requires 'Module::Build::Pluggable::CPANfile' => '0.02';
+
+  # requires 'Foo::Bar' => '0.01';
+
+  on test => sub {
+      requires 'Test::More'     => '0.98';
+      requires 'Test::Requires' => '0.06';
+  };
 ---
 file: t/00_compile.t
 template: |
