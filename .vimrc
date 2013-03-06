@@ -54,6 +54,9 @@ filetype plugin on
 filetype indent on
 syntax on
 
+" カラースキーマ
+colorscheme Tomorrow
+
 "ヘルプファイル
 helptags $HOME/.vim/doc
 
