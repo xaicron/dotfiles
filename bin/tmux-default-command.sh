@@ -1,6 +1,6 @@
 #!/bin/sh
-if [ `uname` = "Darwin" ] && [ -x ~/bin/tmux-pasteboard ]; then
-    ~/bin/tmux-pasteboard -l $SHELL
+if [ ! -z $ENABLED_REATTACH ]; then
+    reattach-to-user-namespace -l $SHELL
 else
     $SHELL
 fi

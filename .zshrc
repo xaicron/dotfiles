@@ -157,6 +157,13 @@ if [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && [ "$TMUX" != "" ]; then
     tmux set-option status-bg colour26 > /dev/null 2>&1
 fi
 
+if [ `uname` = "Darwin" ]; then
+    which reattach-to-user-namespace 2>&1 > /dev/null;
+    if [ "$?" = "0" ]; then
+        export ENABLED_REATTACH=1;
+    fi
+fi
+
 # screen
 #if [ "$TERM" = "screen" ]; then
 #    chpwd () { echo -n "_`dirs`\\" }
