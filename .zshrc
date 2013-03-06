@@ -202,5 +202,5 @@ if [ -f ~/.zsh_local ]; then
 fi
 
 # uniq path
-typeset -U path
+typeset -U path cdpath fpath manpath
 
