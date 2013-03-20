@@ -1,19 +1,20 @@
-# cdd
-source ~/.zsh/etc/cdd
-function chpwd() {
+for f in ~/.zsh/etc/*; do source $f; done
+
+chpwd() {
+    # for cdd
     _reg_pwd_screennum
 }
 
-# functions
-function reload() {
+reload() {
     source ~/.zshrc
 }
 
 # vim perldoc
-functions vpd() {
+vpd() {
     if [ $# -lt 1 ]; then;
         echo "Usage: vpd <perl-module>"
         return 1;
     fi
     perldoc -M Pod::Strip $* | vim -R -c 'set filetype=perl' -
 }
+

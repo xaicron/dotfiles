@@ -7,6 +7,10 @@ case ${UID} in
 esac
 
 # function path
+if [ `uname` = "Darwin" ]  && [ -e "/usr/local/share/zsh-completions" ]; then
+    fpath=(/usr/local/share/zsh-completions $fpath)
+fi
+
 fpath=($HOME/.zsh/func $fpath)
 
 autoload -Uz compinit
@@ -146,62 +150,11 @@ export GIT_EDITOR=vim
 
 # general env
 export EDITOR=vim
-export PAGER=less
+export PAGER="less -R"
 
 # PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$HOME/bin:$HOME/local/bin:$PATH
-
-# TMUX setting
-if [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && [ "$TMUX" != "" ]; then
-    tmux set-option status-bg colour26 > /dev/null 2>&1
-fi
-
-if [ `uname` = "Darwin" ]; then
-    which reattach-to-user-namespace 2>&1 > /dev/null;
-    if [ "$?" = "0" ]; then
-        export ENABLED_REATTACH=1;
-    fi
-fi
-
-# screen
-#if [ "$TERM" = "screen" ]; then
-#    chpwd () { echo -n "_`dirs`\\" }
-#    preexec() {
-#        # see [zsh-workers:13180]
-#        # http://www.zsh.org/mla/workers/2000/msg03993.html
-#        emulate -L zsh
-#        local -a cmd; cmd=(${(z)2})
-#        case $cmd[1] in
-#            fg)
-#                if (( $#cmd == 1 )); then
-#                    cmd=(builtin jobs -l %+)
-#                else
-#                    cmd=(builtin jobs -l $cmd[2])
-#                fi
-#                ;;
-#            %*) 
-#                cmd=(builtin jobs -l $cmd[1])
-#                ;;
-#            cd)
-#                if (( $#cmd == 2)); then
-#                    cmd[1]=$cmd[2]
-#                fi
-#                ;&
-#            *)
-#                echo -n "k$cmd[1]:t\\"
-#                return
-#                ;;
-#        esac
-#
-#        local -A jt; jt=(${(kv)jobtexts})
-#
-#        $cmd >>(read num rest
-#            cmd=(${(z)${(e):-\$jt$num}})
-#            echo -n "k$cmd[1]:t\\") 2>/dev/null
-#    }
-#    chpwd
-#fi
 
 # load local setting
 if [ -f ~/.zsh_local ]; then
@@ -210,4 +163,3 @@ fi
 
 # uniq path
 typeset -U path cdpath fpath manpath
-

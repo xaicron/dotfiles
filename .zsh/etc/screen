@@ -1,0 +1,32 @@
+if [ "$TERM" = "screen" ]; then
+    preexec() {
+        # see [zsh-workers:13180]
+        # http://www.zsh.org/mla/workers/2000/msg03993.html
+        emulate -L zsh
+        local -a cmd;
+        cmd=(${(z)2})
+        case $cmd[1] in
+            fg)
+                if (( $#cmd == 1 )); then
+                    cmd=(builtin jobs -l %+)
+                else
+                    cmd=(builtin jobs -l $cmd[2])
+                fi
+                ;;
+            %*)
+                cmd=(builtin jobs -l $cmd[1])
+                ;;
+            *)
+                echo -n "\ek$cmd[1]:t\e\\"
+                return
+                ;;
+        esac
+
+        local -A jt; jt=(${(kv)jobtexts})
+
+        $cmd >>(read num rest
+            cmd=(${(z)${(e):-\$jt$num}})
+            echo -n "\ek$cmd[1]:t\e\\") 2>/dev/null
+    }
+    precmd () { echo -n "\ek$SHELL:t\e\\" }
+fi
