@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ $# -lt 2 ]; then
+    echo "Usage: git renametag old-tag new-tag"
+    exit 1
+fi
+
+target_commit=`git rev-parse $1`
+git tag $2 $target_commit
+git push origin :$1 $2

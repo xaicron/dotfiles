@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cat | grep -e '^t/' -e '^xt/' | awk '{ print $1 }'
