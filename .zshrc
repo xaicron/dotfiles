@@ -94,7 +94,13 @@ function _git_prompt () {
         local _not_pushed=$(_git_not_pushed);
         _info="%{$fg[red]%}(${_not_pushed}${vcs_info_msg_0_})%{$fg[default]%} "
     fi
-    PROMPT="%B${_info}%{$fg[cyan]%}[%D %*]%{$fg[cyan]%}%#%{$fg[default]%}%b "
+    PROMPT="%B${_info}%{$fg[cyan]%}[%D %*]%{$fg[cyan]%}"
+    if [ `uname` = "Darwin" ]; then
+        local _emoji=$'\U26A1 '
+        PROMPT="${PROMPT}%{$fg[default]%}${_emoji}%b "
+    else
+        PROMPT="${PROMPT}%#%{$fg[default]%}%b"
+    fi
     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && PROMPT="%B%{$fg[white]%}(${USER}@${HOST%%.*}) ${PROMPT}"
 }
 
