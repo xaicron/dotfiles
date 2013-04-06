@@ -1,3 +1,18 @@
+" setup Vundle
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'vim-perl/vim-perl'
+Bundle 'xaicron/perldoc-vim'
+Bundle 'othree/eregex.vim'
+
+filetype plugin indent on
+" teardown Vundle
+
 "行番号を非表示
 set nonumber
 "括弧入力時に対応する括弧を表示

@@ -1,5 +1,6 @@
 \.vim-backup
 \.vimperator/info
 \.vim/\.netrwhist
+\.vim/bundle/*
 \.dir_colors
 \.zsh/cdd/*
