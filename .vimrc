@@ -13,47 +13,44 @@ Bundle 'othree/eregex.vim'
 filetype plugin indent on
 " teardown Vundle
 
-"行番号を非表示
+" 行番号を非表示
 set nonumber
-"括弧入力時に対応する括弧を表示
+" 括弧入力時に対応する括弧を表示
 set showmatch
-"コマンドをステータス行に表示
+" コマンドをステータス行に表示
 set showcmd
-"タイトルを表示
+" タイトルを表示
 set title
-"常にステータス行を表示
+" 常にステータス行を表示
 set laststatus=2
 
-"if(){}などのインデント
+" if(){}などのインデント
 set cindent
 
-"ルーラーを表示
+" ルーラーを表示
 set ruler
 set ignorecase
 
-"検索に大文字を含んでいたら大小区別
+" 検索に大文字を含んでいたら大小区別
 set smartcase
-"検索時にヒット部位の色を変更
+" 検索時にヒット部位の色を変更
 set hlsearch
-"検索時にインクリメンタルサーチを行う
+" 検索時にインクリメンタルサーチを行う
 set incsearch
 set showmode
 
-"コマンドラインの履歴の保存数
+" コマンドラインの履歴の保存数
 set history=1024
-"インデント
+" インデント
 set autoindent
 set smartindent
 set smarttab
 
-"置換に正規表現を使えるようにする
+" 置換に正規表現を使えるようにする
 set magic
 
-"ペースト
-"set paste
-
 set tabstop=4
-"タブを空白に置き換える
+" タブを空白に置き換える
 set expandtab
 set softtabstop=4
 set shiftwidth=4
@@ -72,57 +69,49 @@ syntax on
 " カラースキーマ
 colorscheme Tomorrow
 
-"ヘルプファイル
-helptags $HOME/.vim/doc
+" ファイルタイプ別辞書ファイル
+au FileType perl :set dictionary+=~/.vim/dict/perl_function.dict
+au FileType perl :compiler perl
 
-"ファイルタイプ別辞書ファイル
-"autocmd FileType c,cpp,perl set cindent
-autocmd FileType ruby :set dictionary=~/.vim/plugin/ruby.vim
-autocmd FileType perl :set dictionary+=~/.vim/dict/perl_function.dict
-autocmd FileType perl :compiler perl
+au FileType python     set omnifunc=pythoncomplete#Complete
+au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+au FileType html       set omnifunc=htmlcomplete#CompleteTags
+au FileType css        set omnifunc=csscomplete#CompleteCSS
+au FileType xml        set omnifunc=xmlcomplete#CompleteTags
+au FileType php        set omnifunc=phpcomplete#CompletePHP
+au FileType c          set omnifunc=ccomplete#Complete
 
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
-
-" syntax
+" set filetype
 :au BufEnter *.t,*.psgi,*.perl,*.tra,cpanfile execute ":setlocal filetype=perl"
 :au BufEnter *.tt,*.cfm execute ":setlocal filetype=html"
 :au BufEnter *.sql execute ":setlocal filetype=mysql"
 
-"辞書ファイルを使用する設定に変更
+" 辞書ファイルを使用する設定に変更
 set complete+=k
 set complete-=i
 
-"Vroom
+" Vroom
 set exrc
 
 " 全角スペースとタブの表示
 highlight WhiteSpace cterm=underline ctermfg=lightblue guibg=darkgray
 match WhiteSpace /[	　]/
 
-"バッファを開いた時に、カレントディレクトリを自動で移動
-":au BufEnter *.pl,*.pm,*.cgi,*.yaml,*.json,*.psgi execute ":lcd " . expand("%:p:h")
-
 noremap  
 noremap!  
 
-"reset highlight
+" reset highlight
 nmap  :nohlsearch<CR>
 
-":w + !perl command
+" :w + !perl command
 map <F4>  :w !perl -Ilib<CR>
-"!perl command
+" !perl command
 map <F5>  :!perl -Ilib %<CR>
 
-"全選択
+" 全選択
 map <F8> ggVG
 
-"paste from clipboard
+" paste from clipboard
 if has('mac') && !has('gui')
     nmap <S-p> :r !pbpaste<CR>
     vmap <S-p> :r !pbpaste<CR>
@@ -132,7 +121,7 @@ elseif has('unix') && !has('gui')
     nmap <Space>p :set paste<CR>:r !xsel -o -b<CR>:set nopaste<CR>
 endif
 
-"lhs comments
+" lhs comments
 map ,# :s/^/#/<CR>
 map ,/ :s/^/\/\//<CR>
 map ,> :s/^/> /<CR>
@@ -143,13 +132,11 @@ map ,; :s/^/;/<CR>
 map ,- :s/^/--/<CR>
 map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>
 
-"wrapping comments
+" wrapping comments
 map ,* :s/^\(.*\)$/\/\* \1 \*\//<CR>
 map ,( :s/^\(.*\)$/\(\* \1 \*\)/<CR>
 map ,< :s/^\(.*\)$/<!-- \1 -->/<CR>
 map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>
-
-
 
 " ===================================================================
 " Mapping of special keys - arrow keys and function keys.
@@ -158,9 +145,6 @@ map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>
 " this makes a little more easy to deal with buffers.
 map <F6> :split<C-M>
 map <F7> :vsp<C-M>
-"map <F6>  :bp<C-M>
-"map <F7>  :bn<C-M>
-"map <F8> :bd<C-M>
 
 map <C-Down>  <C-w>j
 map <C-Up>    <C-w>k
@@ -171,11 +155,11 @@ map <C-k> <C-W>k<C-w>_
 map <C-h> <C-w>h<C-w>_
 map <C-l> <C-w>l<C-w>_
 
-"insert mode key mapping
+" insert mode key mapping
 
 " <Tab> is bound to `complete'
-"inoremap <tab> <c-p>
-" 
+" inoremap <tab> <c-p>
+"
 " cycle fast through buffers ...
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
@@ -183,10 +167,6 @@ nnoremap <C-p> :bp<CR>
 " cycle fast through errors ...
 map <m-n> :cn<cr>
 map <m-p> :cp<cr>
-
-"if filereadable(expand('~/.vim/source/auto_encoding'))
-"    source ~/.vim/source/auto_encoding
-"endif
 
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
