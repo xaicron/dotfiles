@@ -9,6 +9,7 @@ Bundle 'gmarik/vundle'
 Bundle 'vim-perl/vim-perl'
 Bundle 'xaicron/perldoc-vim'
 Bundle 'othree/eregex.vim'
+Bundle 'vim-scripts/AutoComplPop'
 
 filetype plugin indent on
 " teardown Vundle
