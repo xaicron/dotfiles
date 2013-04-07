@@ -99,7 +99,7 @@ function _git_prompt () {
         local _emoji=$'\U26A1 '
         PROMPT="${PROMPT}%{$fg[default]%}${_emoji}%b "
     else
-        PROMPT="${PROMPT}%#%{$fg[default]%}%b"
+        PROMPT="${PROMPT}%#%{$fg[default]%}%b "
     fi
     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && PROMPT="%B%{$fg[white]%}(${USER}@${HOST%%.*}) ${PROMPT}"
 }
