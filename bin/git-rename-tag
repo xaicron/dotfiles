@@ -8,5 +8,6 @@ if [ $# -lt 2 ]; then
 fi
 
 target_commit=`git rev-parse $1`
-git tag $2 $target_commit
+git tag -a $2 $target_commit -m 'renamed $1 -> $2'
+git tag -d $1
 git push origin :$1 $2
