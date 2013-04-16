@@ -10,6 +10,7 @@ Bundle 'vim-perl/vim-perl'
 Bundle 'xaicron/perldoc-vim'
 Bundle 'othree/eregex.vim'
 Bundle 'vim-scripts/AutoComplPop'
+Bundle 'vim-scripts/svn-diff.vim'
 
 filetype plugin indent on
 " teardown Vundle
