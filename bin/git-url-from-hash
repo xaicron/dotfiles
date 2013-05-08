@@ -3,6 +3,14 @@
 use strict;
 use warnings;
 use feature 'say';
+use Getopt::Long qw(:config posix_default no_ignore_case gnu_compat bundling);
+use Pod::Usage qw(pod2usage);
+
+my $opts = {};
+GetOptions(
+    'h|help' => sub { pod2usage(0) },
+    'o|open' => \$opts->{open},
+) or pod2usage(1);
 
 my $hash = shift || die "Usage: git url-form-hash <sha1>\n";
 chomp($hash = `git rev-parse $hash`);
@@ -11,4 +19,27 @@ exit $? if $?;
 chomp(my $remote = `git gh-url`);
 exit $? if $?;
 
-say sprintf '%s/commit/%s', $remote, $hash;
+my $url = sprintf '%s/commit/%s', $remote, $hash;
+
+if ($opts->{open}) {
+    system 'open', $url;
+}
+else {
+    say $url;
+}
+
+__END__
+
+=head1 NAME
+
+git-url-from-hash - display github url from hash
+
+=head1 SYNOPSIS
+
+    git url-from_hash [option] <sha1>
+
+=head1 OPTIONS
+
+    -o, --open    Open result of the URL if your system is OS X.
+    -h, --help    Show this message.
+

@@ -7,8 +7,15 @@ use feature 'say';
 chomp(my $remote = `git config remote.origin.url`);
 exit $? if $?;
 
-$remote =~ s!:!/!;
-$remote =~ s!git\@!https://!;
+if ($remote =~ /^git\@/) {
+    # git@github.com:foo/bar.git
+    $remote =~ s!:!/!;
+    $remote =~ s!^git\@!https:!;
+}
+else {
+    # git://github.com/foo/bar.git
+    $remote =~ s!^git!https!;
+}
 $remote =~ s!\.git$!!;
 
 say $remote;
