@@ -1,5 +1,8 @@
 #!/bin/sh
 
-sudo launchctl unload /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
-sudo launchctl load /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
-
+if [ -f "/System/Library/LaunchDaemons/com.apple.mDNSResponder.plist" ]; then
+    sudo launchctl unload /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
+    sudo launchctl load /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
+else
+    sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;say flushed
+fi
