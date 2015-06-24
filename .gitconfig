@@ -6,8 +6,9 @@
 [alias]
 	show-graph = log --graph --abbrev-commit --pretty=oneline
 	co = checkout
-	tree = log --graph --pretty='format:%C(yellow)%cr%C(reset) %h %C(green)%an%C(reset) | %s %C(red)%d%C(reset)'
+	tree = log --graph --pretty='format:%C(yellow)%ci%C(reset) %h %C(green)%an%C(reset) | %s %C(red)%d%C(reset)'
 	st = status -sb
 	ci = commit -v
+	df = diff --no-prefix
 [github]
 	user = xaicron
