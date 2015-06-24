@@ -1,0 +1,99 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use feature 'say';
+use URI;
+use URI::QueryParam;
+use URI::Escape;
+use JSON;
+use Getopt::Compact::WithCmd;
+use Data::Recursive::Encode;
+
+local $Data::Recursive::Encode::DO_NOT_PROCESS_NUMERIC_VALUE = 1;
+
+my $go = Getopt::Compact::WithCmd->new(
+    version       => '0.1',
+    args          => 'url',
+    global_struct => {
+        unescape => {
+            alias => 'u',
+            type  => 'Bool',
+            desc  => 'unescape uri',
+        },
+        'dump-query' => {
+            alias => 'd',
+            type  => 'Bool',
+            desc  => 'dump query parameters in json format',
+        },
+        canonical => {
+            alias => 'c',
+            type  => 'Bool',
+            desc  => 'uri canonicalize',
+        },
+    },
+);
+
+if ($ENV{PERL_GCWC_SHOW_COMP}) {
+    $go->show_completion;
+}
+
+my $opts = $go->opts || $go->show_usage;
+my $url  = shift     || $go->show_usage;
+
+main: {
+    if ($opts->{unescape}) {
+        $url = uri_unescape $url;
+    }
+
+    my $uri = URI->new($url);
+    if ($opts->{canonical}) {
+        $uri->canonical;
+    }
+
+    if ($opts->{'dump-query'}) {
+        say JSON->new->utf8->pretty->canonical->encode(
+            Data::Recursive::Encode->decode_utf8($uri->query_form_hash),
+        );
+        exit;
+    }
+
+    my $result = $uri->as_string;
+    unless ($opts->{unescape}) {
+        $result = uri_escape_utf8 $result;
+    }
+
+    say $result;
+}
+
+__END__
+_uri_escape() {
+  COMPREPLY=()
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  local prev=${COMP_WORDS[COMP_CWORD-1]}
+  local cmd=()
+  for ((i=1; i<COMP_CWORD; i++)); do
+    # skip global opts and type to find cmd
+    if [[ "${COMP_WORDS[$i]}" != -* && "${COMP_WORDS[$i]}" != [A-Z]* ]]; then
+      cmd[${#cmd[@]}]=${COMP_WORDS[$i]}
+    fi
+  done
+
+  local global_opts="-h --help -u --unescape"
+  local cmds=""
+
+  case "$cmd" in
+    *)
+      case "$prev" in
+        -u|--unescape)
+          COMPREPLY=($(compgen -W "Bool" -- "$cur"))
+          ;;
+        *)
+          COMPREPLY=($(compgen -W "$global_opts $cmds" -- "$cur"))
+          ;;
+      esac
+      ;;
+  esac
+}
+
+complete -F _uri_escape uri_escape
