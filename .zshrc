@@ -10,6 +10,9 @@ esac
 if [ `uname` = "Darwin" ]  && [ -e "/usr/local/share/zsh-completions" ]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
+if [ `uname` = "Darwin" ]  && [ -e "/usr/local/share/zsh/site-functions" ]; then
+    fpath=(/usr/local/share/zsh/site-functions $fpath)
+fi
 
 fpath=($HOME/.zsh/func $fpath)
 
@@ -43,10 +46,10 @@ setopt rm_star_silent
 setopt noclobber
 
 # completions
-#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-#zstyle ':completion:*' use-cache true
-#zstyle ':completion:*:match:*' original only
-#zstyle ':completion:*:default' menu select=3
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:default' menu select=3
 
 # history
 export HISTFILE=~/.zsh_history
@@ -130,19 +133,6 @@ source ~/.zsh/functions
 # alias
 source ~/.zsh/alias
 
-# set color
-export CLICOLOR=1
-export LSCOLORS=DxGxcxdxCxegedabagacad
-which dircolors > /dev/null
-if [ $? -eq 0 ]; then
-    if [ ! -f ~/.dir_colors ]; then
-        dircolors -p > ~/.dir_colors
-    fi
-    eval `dircolors -b ~/.dir_colors`
-fi
-
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-
 # perl path
 if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
     source ~/perl5/perlbrew/etc/bashrc
@@ -159,8 +149,22 @@ export EDITOR=vim
 export PAGER="less -R"
 
 # PATH
+export PATH=$PATH:/usr/local/opt/coreutils/libexec/gnubin
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$HOME/bin:$HOME/local/bin:$PATH
+
+# set color
+export CLICOLOR=1
+export LSCOLORS=DxGxcxdxCxegedabagacad
+which dircolors > /dev/null
+if [ $? -eq 0 ]; then
+    if [ ! -f ~/.dir_colors ]; then
+        dircolors -p > ~/.dir_colors
+    fi
+    eval `dircolors -b ~/.dir_colors`
+fi
+
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # load local setting
 if [ -f ~/.zsh_local ]; then
@@ -169,3 +173,4 @@ fi
 
 # uniq path
 typeset -U path cdpath fpath manpath
+#alias pm-uninstall=cpanm -U
