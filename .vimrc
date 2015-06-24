@@ -8,9 +8,10 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'vim-perl/vim-perl'
 Bundle 'xaicron/perldoc-vim'
-Bundle 'othree/eregex.vim'
+" Bundle 'othree/eregex.vim'
 Bundle 'vim-scripts/AutoComplPop'
 Bundle 'vim-scripts/svn-diff.vim'
+Bundle 'othree/html5.vim'
 
 filetype plugin indent on
 " teardown Vundle
@@ -85,7 +86,7 @@ au FileType c          set omnifunc=ccomplete#Complete
 
 " set filetype
 :au BufEnter *.t,*.psgi,*.perl,*.tra,cpanfile execute ":setlocal filetype=perl"
-:au BufEnter *.tt,*.cfm execute ":setlocal filetype=html"
+:au BufEnter *.tt,*.cfm,*.tx execute ":setlocal filetype=html"
 :au BufEnter *.sql execute ":setlocal filetype=mysql"
 
 " 辞書ファイルを使用する設定に変更
@@ -124,21 +125,25 @@ elseif has('unix') && !has('gui')
 endif
 
 " lhs comments
-map ,# :s/^/#/<CR>
-map ,/ :s/^/\/\//<CR>
-map ,> :s/^/> /<CR>
-map ," :s/^/\"/<CR>
-map ,% :s/^/%/<CR>
-map ,! :s/^/!/<CR>
-map ,; :s/^/;/<CR>
-map ,- :s/^/--/<CR>
-map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>
+vmap ,# :s/^/#/<CR>:nohlsearch<CR>
+vmap ,/ :s/^/\/\//<CR>:nohlsearch<CR>
+vmap ,> :s/^/> /<CR>:nohlsearch<CR>
+vmap ," :s/^/\"/<CR>:nohlsearch<CR>
+vmap ,% :s/^/%/<CR>:nohlsearch<CR>
+vmap ,! :s/^/!/<CR>:nohlsearch<CR>
+vmap ,; :s/^/;/<CR>:nohlsearch<CR>
+vmap ,- :s/^/--/<CR>:nohlsearch<CR>
+vmap ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>:nohlsearch<CR>
 
 " wrapping comments
-map ,* :s/^\(.*\)$/\/\* \1 \*\//<CR>
-map ,( :s/^\(.*\)$/\(\* \1 \*\)/<CR>
-map ,< :s/^\(.*\)$/<!-- \1 -->/<CR>
-map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>
+vmap ,* :s/^\(.*\)$/\/\* \1 \*\//<CR>:nohlsearch<CR>
+vmap ,( :s/^\(.*\)$/\(\* \1 \*\)/<CR>:nohlsearch<CR>
+vmap ,< :s/^\(.*\)$/<!-- \1 -->/<CR>:nohlsearch<CR>
+vmap ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>:nohlsearch<CR>
+
+" block comments
+vmap ,b v`<I<CR><esc>k0i/*<ESC>`>j0i*/<CR><esc><ESC>
+vmap ,h v`<I<CR><esc>k0i<!--<ESC>`>j0i--><CR><esc><ESC>
 
 " ===================================================================
 " Mapping of special keys - arrow keys and function keys.
@@ -176,3 +181,6 @@ endif
 
 set list
 set lcs=nbsp:_,tab:>_,trail:_,extends:>,precedes:<
+
+" very magic
+nnoremap / /\v
