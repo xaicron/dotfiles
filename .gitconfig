@@ -10,5 +10,6 @@
 	st = status -sb
 	ci = commit -v
 	df = diff --no-prefix
+	recent-branch = for-each-ref --sort=-committerdate refs/heads refs/remotes --format='%(color:yellow)%(authordate:iso8601)%(color:reset) %(color:green)%(authorname)%(color:reset) | %(refname:short) %(color:red)%(upstream:track)%(color:reset)'
 [github]
 	user = xaicron
