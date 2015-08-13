@@ -21,6 +21,7 @@ die '$ENV{HOME} not set' unless $ENV{HOME};
 
 my $home = $ENV{HOME}; # change safe
 chdir $home;
+mkdir '.vim-backup';
 
 my $ipc = IPC::Open3::Simple->new(out => sub { print "$_[0]\n" }, err => sub { warn "$_[0]\n" });
 
