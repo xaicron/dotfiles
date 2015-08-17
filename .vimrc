@@ -64,6 +64,9 @@ set backup
 set backupdir=$HOME/.vim-backup
 let &directory = &backupdir
 
+" さようなら undofile
+set noundofile
+
 " syntax
 filetype plugin on
 filetype indent on

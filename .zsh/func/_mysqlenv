@@ -37,6 +37,7 @@ __mysqlenv_commands() {
         'rehash[run this command after install, contains executable script.]'
         "which[locate a program file in the mysql's path]"
         'version[show current mysql version]'
+        'self-upgrade[upgrade itself]'
     )
 
     _values $_mysqlenv_commands
