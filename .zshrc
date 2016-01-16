@@ -7,11 +7,17 @@ case ${UID} in
 esac
 
 # function path
-if [ `uname` = "Darwin" ]  && [ -e "/usr/local/share/zsh-completions" ]; then
-    fpath=(/usr/local/share/zsh-completions $fpath)
-fi
-if [ `uname` = "Darwin" ]  && [ -e "/usr/local/share/zsh/site-functions" ]; then
-    fpath=(/usr/local/share/zsh/site-functions $fpath)
+if [ `uname` = "Darwin" ]; then
+    unalias run-help
+    autoload run-help
+    HELPDIR=/usr/local/share/zsh/help
+
+    if [ -e "/usr/local/share/zsh-completions" ]; then
+        fpath=(/usr/local/share/zsh-completions $fpath)
+    fi
+    if [ -e "/usr/local/share/zsh/site-functions" ]; then
+        fpath=(/usr/local/share/zsh/site-functions $fpath)
+    fi
 fi
 
 fpath=($HOME/.zsh/func $fpath)
