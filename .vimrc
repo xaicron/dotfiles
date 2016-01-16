@@ -24,13 +24,14 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc.vim', {
 \ 'build' : {
 \     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
+\     'cygwin'  : 'make -f make_cygwin.mak',
+\     'mac'     : 'make',
+\     'linux'   : 'make',
+\     'unix'    : 'gmake',
 \    },
 \ }
 NeoBundle 'Shougo/neocomplcache.git'
+NeoBundle 'vim-scripts/AutoComplPop'
 NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'vim-perl/vim-perl'
 NeoBundle 'xaicron/perldoc-vim'
@@ -52,6 +53,11 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 " teardown NeoBundle
+
+" " load neocomplcache setting
+" if filereadable(expand('~/.vimrc_neocomplcache'))
+"     source ~/.vimrc_neocomplcache
+" endif
 
 " 行番号を非表示
 set nonumber
