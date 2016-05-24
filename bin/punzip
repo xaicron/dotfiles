@@ -1,0 +1,55 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use Encode;
+use Archive::Zip;
+use Docopt;
+use Term::ReadLine;
+
+my $opts = docopt();
+my $file = $opts->{'<file>'};
+
+main: {
+    my ($from, $to) = @$opts{qw/--from --to/};
+
+    my $zip = Archive::Zip->new;
+    die "$file read failed" unless $zip->read($file) == Archive::Zip::AZ_OK;
+
+    my $password;
+    for my $name ($zip->memberNames) {
+        my $member = $zip->memberNamed($name);
+        if ($member->isEncrypted) {
+            unless (defined $password) {
+                my $term = Term::ReadLine::Gnu->new('punzip');
+                my $attribs = $term->Attribs;
+                $attribs->{redisplay_function} = $attribs->{shadow_redisplay};
+                $password = $term->readline('password: ');
+            }
+            $member->password($password);
+        }
+
+        my $extract_name = encode $to => decode $from => $name;
+        print "exsits $extract_name\n" and next if -f $extract_name;
+        $zip->extractMember($name, $extract_name);
+    }
+}
+
+exit;
+
+__END__
+
+=head1 NAME
+
+  punzip - unzip with encoding.
+
+=head1 SYNOPSIS
+
+  punzip [options] <file>
+  punzip -h | --help
+
+  Options:
+      -h --help                  Show this screen
+      -f <from>, --from=<from>   Original encoding [default: utf8]
+      -t <to>, --to=<to>         Output encoding [default: utf8]
+
