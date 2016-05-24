@@ -54,10 +54,13 @@ filetype plugin indent on
 NeoBundleCheck
 " teardown NeoBundle
 
+" settings for neocomplcache
 " " load neocomplcache setting
 " if filereadable(expand('~/.vimrc_neocomplcache'))
 "     source ~/.vimrc_neocomplcache
 " endif
+
+" settings for lightline
 
 " 行番号を非表示
 set nonumber
