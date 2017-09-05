@@ -106,9 +106,12 @@ set shiftwidth=4
 set backspace=indent,eol,start
 
 " バックアップディレクトリを変更
-set backup
-set backupdir=$HOME/.vim-backup
-let &directory = &backupdir
+set nobackup
+" set backupdir=$HOME/.vim-backup
+" let &directory = &backupdir
+
+" スワップファイルを作らない
+set noswapfile
 
 " さようなら undofile
 set noundofile
