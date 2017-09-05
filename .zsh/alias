@@ -23,3 +23,5 @@ alias zcp='zmv -C'
 alias zln='zmv -L'
 
 alias mkdir='mkdir -p'
+
+alias json='json_pp --json_opt utf8,pretty,canonical'

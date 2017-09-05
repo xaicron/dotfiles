@@ -8,8 +8,7 @@ esac
 
 # function path
 if [ `uname` = "Darwin" ]; then
-    unalias run-help
-    autoload run-help
+    autoload -Uz run-help
     HELPDIR=/usr/local/share/zsh/help
 
     if [ -e "/usr/local/share/zsh-completions" ]; then
@@ -50,6 +49,7 @@ setopt globdots
 setopt no_flow_control
 setopt rm_star_silent
 setopt noclobber
+setopt no_global_rcs # important on mac
 
 # completions
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -139,11 +139,6 @@ source ~/.zsh/functions
 # alias
 source ~/.zsh/alias
 
-# perl path
-if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
-    source ~/perl5/perlbrew/etc/bashrc
-fi
-
 # perl env
 export PERL_CPANM_OPT="--skip-installed"
 
@@ -158,6 +153,11 @@ export PAGER="less -R"
 export PATH=$PATH:/usr/local/opt/coreutils/libexec/gnubin
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$HOME/bin:$HOME/local/bin:$PATH
+
+# perl path
+if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
+    source ~/perl5/perlbrew/etc/bashrc
+fi
 
 # set color
 export CLICOLOR=1
