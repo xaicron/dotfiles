@@ -11,6 +11,8 @@ if [ $? -eq 0 ]; then
     alias diff='colordiff'
 fi
 
+alias tmux='tmux -2'
+
 # for MacOS
 if [ `uname` = "Darwin" ]; then
     # mac vim
