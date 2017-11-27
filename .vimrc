@@ -1,64 +1,55 @@
-" setup NeoBundle
-" Note: Skip initialization for vim-tiny or vim-small.
-if 0 | endif
-
-if has('vim_starting')
-  if &compatible
-    set nocompatible " Be iMproved
-  endif
-
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
 endif
 
 " Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-" Let NeoBundle manage NeoBundle
 " Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+if dein#load_state('~/.vim/dein')
+  call dein#begin('~/.vim/dein')
 
-" My Bundles here:
-" Refer to |:NeoBundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin'  : 'make -f make_cygwin.mak',
-\     'mac'     : 'make',
-\     'linux'   : 'make',
-\     'unix'    : 'gmake',
-\    },
-\ }
-NeoBundle 'Shougo/neocomplcache.git'
-NeoBundle 'vim-scripts/AutoComplPop'
-NeoBundle 'Shougo/unite.vim.git'
-NeoBundle 'vim-perl/vim-perl'
-NeoBundle 'xaicron/perldoc-vim'
-NeoBundle 'othree/html5.vim'
-NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'jelera/vim-javascript-syntax'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'tpope/vim-fugitive'
+  " Let dein manage dein
+  " Required:
+  call dein#add('~/.vim/dein/repos/github.com/Shougo/dein.vim')
 
-" Colorscheme
-NeoBundle 'wellsjo/wellsokai.vim'
+  " Add or remove your plugins here:
+    " call dein#add('Shougo/neosnippet.vim')
+    " call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('Shougo/neocomplcache.git')
+  call dein#add('Shougo/unite.vim.git')
+  call dein#add('vim-perl/vim-perl')
+  call dein#add('xaicron/perldoc-vim')
+  call dein#add('othree/html5.vim')
+  call dein#add('hail2u/vim-css3-syntax')
+  call dein#add('jelera/vim-javascript-syntax')
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('vim-scripts/AutoComplPop')
+  call dein#add('fatih/vim-go')
 
-call neobundle#end()
+  " Colorscheme
+  call dein#add('wellsjo/wellsokai.vim')
+
+  " You can specify revision/branch/tag.
+    " call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
 
 " Required:
 filetype plugin indent on
+syntax enable
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-" teardown NeoBundle
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
 
-" settings for neocomplcache
-" " load neocomplcache setting
-" if filereadable(expand('~/.vimrc_neocomplcache'))
-"     source ~/.vimrc_neocomplcache
-" endif
+"End dein Scripts-------------------------
 
 " settings for lightline
 
