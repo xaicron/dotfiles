@@ -7,15 +7,17 @@ use feature 'say';
 chomp(my $remote = `git config remote.origin.url`);
 exit $? if $?;
 
-if ($remote =~ /^git\@/) {
+$remote =~ s!^ssh://!!;
+$remote =~ s!\.git$!!;
+
+if ($remote =~ m|^git\@|) {
     # git@github.com:foo/bar.git
     $remote =~ s!:!/!;
-    $remote =~ s!^git\@!https:!;
+    $remote =~ s!^git\@!https://!;
 }
 else {
     # git://github.com/foo/bar.git
     $remote =~ s!^git!https!;
 }
-$remote =~ s!\.git$!!;
 
 say $remote;

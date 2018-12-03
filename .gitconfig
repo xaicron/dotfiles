@@ -1,6 +1,5 @@
 [user]
-	name = xaicron
-	email = xaicron@gmail.com
+	useConfigOnly = true
 [color]
 	ui = true
 [alias]
@@ -15,3 +14,11 @@
 	user = xaicron
 [push]
 	default = current
+[core]
+	excludesfile = ~/.gitignore_global
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
+[ghq]
+	root = ~/dev/src
