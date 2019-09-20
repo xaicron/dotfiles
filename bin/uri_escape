@@ -8,9 +8,6 @@ use URI::QueryParam;
 use URI::Escape;
 use JSON;
 use Getopt::Compact::WithCmd;
-use Data::Recursive::Encode;
-
-local $Data::Recursive::Encode::DO_NOT_PROCESS_NUMERIC_VALUE = 1;
 
 my $go = Getopt::Compact::WithCmd->new(
     version       => '0.1',
@@ -52,9 +49,7 @@ main: {
     }
 
     if ($opts->{'dump-query'}) {
-        say JSON->new->utf8->pretty->canonical->encode(
-            Data::Recursive::Encode->decode_utf8($uri->query_form_hash),
-        );
+        say JSON->new->utf8->pretty->canonical->encode($uri->query_form_hash);
         exit;
     }
 
