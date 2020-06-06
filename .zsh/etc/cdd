@@ -44,10 +44,7 @@ CDD_BASE_DIR=$HOME/.zsh/cdd
 
 if [ "$TMUX" != "" ]; then
     export CDD_PWD_FILE=$CDD_BASE_DIR/tmux.$(echo $TMUX | cut -d ',' -f 3)
-    export WINDOW=$(tmux respawn-window 2>&1 > /dev/null | cut -d ':' -f 3)
-    if [ "$WINDOW" = "" ]; then
-        export WINDOW=$(tmux respawn-window > /dev/null | cut -d ':' -f 3)
-    fi
+    export WINDOW=$(tmux list-windows | grep active | cut -d ':' -f 1)
 elif [ "$STY" != "" ]; then
     export CDD_PWD_FILE=$CDD_BASE_DIR/screen.$(echo $STY | cut -d '.' -f 1)
 else
