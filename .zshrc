@@ -109,7 +109,12 @@ function _git_prompt () {
     else
         PROMPT="${PROMPT}%#%{$fg[default]%}%b "
     fi
-    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && PROMPT="%B%{$fg[white]%}(${USER}@${HOST%%.*}) ${PROMPT}"
+    if [ -n "${REMOTEHOST}${SSH_CONNECTION}" ]; then
+        PROMPT="%B%{$fg[white]%}(${USER}@${HOST%%.*}) ${PROMPT}"
+    fi
+    if [ -n "${AWS_PROFILE}" ]; then
+        PROMPT="%B%{$fg[white]%}(AWS_PROFILE=${AWS_PROFILE}) ${PROMPT}"
+    fi
 }
 
 # TODO counting an ahead
