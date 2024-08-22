@@ -1,5 +1,7 @@
 [user]
 	useConfigOnly = true
+	email = xaicron@gmail.com
+	name = Yuji Shimada
 [color]
 	ui = true
 [alias]
@@ -22,3 +24,10 @@
 	diff = diff-highlight | less
 [ghq]
 	root = ~/dev/src
+[init]
+	defaultBranch = main
+[fetch]
+	prune = true
+[diff "lockb"]
+	textconv = bun
+	binary = true
