@@ -9,13 +9,13 @@ esac
 # function path
 if [ `uname` = "Darwin" ]; then
     autoload -Uz run-help
-    HELPDIR=/usr/local/share/zsh/help
+    HELPDIR=${HOMEBREW_PREFIX}/share/zsh/help
 
-    if [ -e "/usr/local/share/zsh-completions" ]; then
-        fpath=(/usr/local/share/zsh-completions $fpath)
+    if [ -e "${HOMEBREW_PREFIX}/share/zsh-completions" ]; then
+        fpath=(${HOMEBREW_PREFIX}/share/zsh-completions $fpath)
     fi
-    if [ -e "/usr/local/share/zsh/site-functions" ]; then
-        fpath=(/usr/local/share/zsh/site-functions $fpath)
+    if [ -e "${HOMEBREW_PREFIX}/share/zsh/site-functions" ]; then
+        fpath=(${HOMEBREW_PREFIX}/share/zsh/site-functions $fpath)
     fi
 fi
 
@@ -181,6 +181,52 @@ if [ -f ~/.zsh_local ]; then
     source ~/.zsh_local
 fi
 
+if type rbenv > /dev/null; then
+    eval "$(rbenv init - zsh)"
+fi
+
+if type direnv > /dev/null; then
+    eval "$(direnv hook zsh)"
+fi
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
+alias emulator=$HOME/Library/Android/sdk/emulator/emulator
+export JAVA_HOME="$HOME/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+export ES_JAVA_HOME=$(find "/opt/homebrew/Cellar/openjdk/" -path '*libexec/openjdk.jdk/Contents/Home' | head -1)
+
 # uniq path
 typeset -U path cdpath fpath manpath
 #alias pm-uninstall=cpanm -U
+
+if [ -d ~/.plenv ]; then
+    export PATH="$HOME/.plenv/bin:$PATH"
+    eval "$(plenv init -)"
+fi
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C ${HOMEBREW_PREFIX}/bin/terraform terraform
+# source ~/.mysqlenv/etc/bashrc
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+# bun completions
+[ -s "/Users/shimada.yuji/.bun/_bun" ] && source "/Users/shimada.yuji/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# ngrok
+if command -v ngrok &>/dev/null; then
+    eval "$(ngrok completion)"
+fi
+
+# proto
+# export PROTO_HOME="$HOME/.proto"
+# export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
+

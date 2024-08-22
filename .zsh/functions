@@ -6,7 +6,7 @@ chpwd() {
 }
 
 reload() {
-    source ~/.zshrc
+    exec $SHELL -l
 }
 
 # vim perldoc
