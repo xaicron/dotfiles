@@ -49,7 +49,8 @@ main: {
     }
 
     if ($opts->{'dump-query'}) {
-        say JSON->new->utf8->pretty->canonical->encode($uri->query_form_hash);
+        say sprintf '%s://%s%s', $uri->scheme, $uri->authority, $uri->path;
+        say JSON->new->pretty->canonical->encode($uri->query_form_hash);
         exit;
     }
 
