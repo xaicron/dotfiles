@@ -143,9 +143,6 @@ source ~/.zsh/functions
 # alias
 source ~/.zsh/alias
 
-# perl env
-export PERL_CPANM_OPT="--skip-installed"
-
 # git env
 export GIT_EDITOR=vim
 
@@ -157,11 +154,6 @@ export PAGER="less -R"
 export PATH=$PATH:/usr/local/opt/coreutils/libexec/gnubin
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$HOME/bin:$HOME/local/bin:$PATH
-
-# perl path
-if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
-    source ~/perl5/perlbrew/etc/bashrc
-fi
 
 # set color
 export CLICOLOR=1
@@ -199,12 +191,6 @@ export ES_JAVA_HOME=$(find "/opt/homebrew/Cellar/openjdk/" -path '*libexec/openj
 
 # uniq path
 typeset -U path cdpath fpath manpath
-#alias pm-uninstall=cpanm -U
-
-if [ -d ~/.plenv ]; then
-    export PATH="$HOME/.plenv/bin:$PATH"
-    eval "$(plenv init -)"
-fi
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C ${HOMEBREW_PREFIX}/bin/terraform terraform
