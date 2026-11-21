@@ -1,0 +1,68 @@
+version: '3'
+
+vars:
+  # bin/ 以下にビルドする Go 製コマンド (cmd/<name>)
+  TOOLS: git-gh-url git-url-from-file git-url-from-hash uri_escape punzip m4a_durations
+
+tasks:
+  default:
+    desc: タスク一覧を表示する
+    cmds:
+      - task --list
+    silent: true
+
+  setup:
+    desc: mise で Go / task をインストールする
+    cmds:
+      - mise install
+
+  install:
+    desc: dotfiles を $HOME にシンボリックリンクし、bin/ のツールをビルドする (例 task install -- --force)
+    deps: [build]
+    cmds:
+      - go run ./cmd/symlink --dir "{{.ROOT_DIR}}" {{.CLI_ARGS}}
+    interactive: true
+
+  link:
+    desc: dotfiles のシンボリックリンクだけを作成する (例 task link -- --force)
+    cmds:
+      - go run ./cmd/symlink --dir "{{.ROOT_DIR}}" {{.CLI_ARGS}}
+    interactive: true
+
+  build:
+    desc: bin/ 以下に Go 製ツールをビルドする
+    cmds:
+      - for: { var: TOOLS }
+        cmd: go build -trimpath -o bin/{{.ITEM}} ./cmd/{{.ITEM}}
+    sources:
+      - go.mod
+      - go.sum
+      - cmd/**/*.go
+      - internal/**/*.go
+
+  test:
+    desc: テストを実行する
+    cmds:
+      - go test ./... {{.CLI_ARGS}}
+
+  lint:
+    desc: gofmt と go vet でチェックする
+    cmds:
+      - test -z "$(gofmt -l cmd internal)" || (gofmt -l cmd internal; exit 1)
+      - go vet ./...
+
+  fmt:
+    desc: gofmt でコードを整形する
+    cmds:
+      - gofmt -w cmd internal
+
+  tidy:
+    desc: go.mod / go.sum を整理する
+    cmds:
+      - go mod tidy
+
+  clean:
+    desc: ビルドした bin/ 以下のツールを削除する
+    cmds:
+      - for: { var: TOOLS }
+        cmd: rm -f bin/{{.ITEM}}

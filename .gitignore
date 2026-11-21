@@ -5,3 +5,6 @@
 \.dir_colors
 \.zsh/cdd/*
 *un~
+
+# task
+.task/
