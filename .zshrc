@@ -173,46 +173,6 @@ if [ -f ~/.zsh_local ]; then
     source ~/.zsh_local
 fi
 
-if type rbenv > /dev/null; then
-    eval "$(rbenv init - zsh)"
-fi
-
-if type direnv > /dev/null; then
-    eval "$(direnv hook zsh)"
-fi
-
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
-export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
-alias emulator=$HOME/Library/Android/sdk/emulator/emulator
-export JAVA_HOME="$HOME/Applications/Android Studio.app/Contents/jbr/Contents/Home"
-export ES_JAVA_HOME=$(find "/opt/homebrew/Cellar/openjdk/" -path '*libexec/openjdk.jdk/Contents/Home' | head -1)
-
 # uniq path
 typeset -U path cdpath fpath manpath
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C ${HOMEBREW_PREFIX}/bin/terraform terraform
-# source ~/.mysqlenv/etc/bashrc
-
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
-
-# bun completions
-[ -s "/Users/shimada.yuji/.bun/_bun" ] && source "/Users/shimada.yuji/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# ngrok
-if command -v ngrok &>/dev/null; then
-    eval "$(ngrok completion)"
-fi
-
-# proto
-# export PROTO_HOME="$HOME/.proto"
-# export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
 
