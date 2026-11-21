@@ -154,6 +154,11 @@ export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
 zstyle ':completion:*:default' list-colors ''
 
+# mise
+if command -v mise > /dev/null; then
+    eval "$(mise activate zsh)"
+fi
+
 # load local setting
 if [ -f ~/.zsh_local ]; then
     source ~/.zsh_local
