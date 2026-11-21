@@ -15,8 +15,6 @@ if [ `uname` = "Darwin" ]; then
     fi
 fi
 
-fpath=($HOME/.zsh/func $fpath)
-
 autoload -Uz compinit
 compinit -u
 autoload -Uz colors
