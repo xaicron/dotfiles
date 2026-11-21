@@ -13,3 +13,4 @@
 /bin/git-gh-url
 /bin/git-url-from-file
 /bin/git-url-from-hash
+/bin/uri_escape
