@@ -9,11 +9,7 @@ esac
 # function path
 if [ `uname` = "Darwin" ]; then
     autoload -Uz run-help
-    HELPDIR=${HOMEBREW_PREFIX}/share/zsh/help
 
-    if [ -e "${HOMEBREW_PREFIX}/share/zsh-completions" ]; then
-        fpath=(${HOMEBREW_PREFIX}/share/zsh-completions $fpath)
-    fi
     if [ -e "${HOMEBREW_PREFIX}/share/zsh/site-functions" ]; then
         fpath=(${HOMEBREW_PREFIX}/share/zsh/site-functions $fpath)
     fi
@@ -151,22 +147,12 @@ export EDITOR=vim
 export PAGER="less -R"
 
 # PATH
-export PATH=$PATH:/usr/local/opt/coreutils/libexec/gnubin
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-export PATH=$HOME/bin:$HOME/local/bin:$PATH
+export PATH=$HOME/bin:$PATH
 
 # set color
 export CLICOLOR=1
 export LSCOLORS=DxGxcxdxCxegedabagacad
-which dircolors > /dev/null
-if [ $? -eq 0 ]; then
-    if [ ! -f ~/.dir_colors ]; then
-        dircolors -p > ~/.dir_colors
-    fi
-    eval `dircolors -b ~/.dir_colors`
-fi
-
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:default' list-colors ''
 
 # load local setting
 if [ -f ~/.zsh_local ]; then
