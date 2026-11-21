@@ -8,3 +8,8 @@
 
 # task
 .task/
+
+# Go binaries built by `task build`
+/bin/git-gh-url
+/bin/git-url-from-file
+/bin/git-url-from-hash
