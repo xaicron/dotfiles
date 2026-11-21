@@ -5,3 +5,14 @@
 \.dir_colors
 \.zsh/cdd/*
 *un~
+
+# task
+.task/
+
+# Go binaries built by `task build`
+/bin/git-gh-url
+/bin/git-url-from-file
+/bin/git-url-from-hash
+/bin/uri_escape
+/bin/punzip
+/bin/m4a_durations
