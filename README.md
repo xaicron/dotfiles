@@ -31,6 +31,12 @@ Existing symlinks are left as they are.
 
 See `internal/link/link.go` for the exact rules.
 
+`claude/CLAUDE.md` holds the global instructions for Claude Code. It is not linked by `task install`; link it by hand:
+
+```sh
+ln -s "$PWD/claude/CLAUDE.md" ~/.claude/CLAUDE.md
+```
+
 ## Tasks
 
 | Command | Description |

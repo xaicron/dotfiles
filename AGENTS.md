@@ -15,6 +15,7 @@ cmd/<name>/        main package for each command (keep it thin)
   symlink/         installer that symlinks the dotfiles into $HOME (not built into bin/)
   git-gh-url/ ...  tools built into bin/
 internal/<pkg>/    logic and tests (link, gitutil, uriescape, punzip)
+claude/CLAUDE.md   global Claude Code instructions (linked to ~/.claude/CLAUDE.md by hand)
 bin/               shell scripts + Go binaries built by task build (binaries are gitignored)
 .zsh*, .vim*, ...  dotfiles themselves
 ```
