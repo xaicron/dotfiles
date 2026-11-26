@@ -28,6 +28,7 @@ Existing symlinks are left as they are.
 
 - Every entry at the repository root whose name starts with `.` (except `.git`, `.gitignore`, `.gitmodules`, and a few others)
 - `bin/` (`$HOME/bin` is added to `PATH` in `.zshrc`)
+- `claude/CLAUDE.md` → `~/.claude/CLAUDE.md` (global instructions for Claude Code; `~/.claude` itself stays a real directory)
 
 See `internal/link/link.go` for the exact rules.
 

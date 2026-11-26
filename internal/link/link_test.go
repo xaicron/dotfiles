@@ -118,3 +118,23 @@ func TestRunSkipsExistingSymlink(t *testing.T) {
 	}
 	assertLink(t, filepath.Join(dst, ".zshrc"), other)
 }
+
+func TestRunCreatesNestedLinks(t *testing.T) {
+	src, dst := setup(t)
+	if err := os.Mkdir(filepath.Join(src, "claude"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	from := filepath.Join(src, "claude", "CLAUDE.md")
+	if err := os.WriteFile(from, []byte("# CLAUDE.md\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	l := &Linker{Src: src, Dst: dst, In: strings.NewReader(""), Out: io.Discard, Err: io.Discard}
+	if err := l.Run(); err != nil {
+		t.Fatal(err)
+	}
+	// ~/.claude はリンクせず通常のディレクトリとして作り、その中のファイルだけをリンクする
+	if fi, err := os.Lstat(filepath.Join(dst, ".claude")); err != nil || !fi.IsDir() {
+		t.Errorf(".claude should be a real directory")
+	}
+	assertLink(t, filepath.Join(dst, ".claude", "CLAUDE.md"), from)
+}
