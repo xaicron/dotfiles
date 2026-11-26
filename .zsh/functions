@@ -9,12 +9,3 @@ reload() {
     exec $SHELL -l
 }
 
-# vim perldoc
-vpd() {
-    if [ $# -lt 1 ]; then;
-        echo "Usage: vpd <perl-module>"
-        return 1;
-    fi
-    perldoc -M Pod::Strip $* | vim -R -c 'set filetype=perl' -
-}
-
