@@ -145,7 +145,12 @@ export EDITOR=vim
 export PAGER="less -R"
 
 # PATH
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
+
+# diff-highlight (bundled with Homebrew git)
+if [ -d "${HOMEBREW_PREFIX}/opt/git/share/git-core/contrib/diff-highlight" ]; then
+    export PATH=$PATH:${HOMEBREW_PREFIX}/opt/git/share/git-core/contrib/diff-highlight
+fi
 
 # set color
 export CLICOLOR=1
