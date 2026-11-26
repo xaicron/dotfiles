@@ -27,6 +27,12 @@ var extra = map[string]bool{
 	"bin": true,
 }
 
+// nested はリポジトリ内のパスと、$HOME 以下のリンク先パスの組。
+// $HOME 側のディレクトリ (~/.claude など) 自体はリンクせず、その中の 1 ファイルだけをリンクする。
+var nested = []struct{ from, to string }{
+	{"claude/CLAUDE.md", ".claude/CLAUDE.md"},
+}
+
 // permissions はリンク後にパーミッションを変更するファイル。
 var permissions = map[string]os.FileMode{
 	".pause": 0o600,
@@ -84,6 +90,19 @@ func (l *Linker) Run() error {
 	for _, name := range names {
 		if err := l.link(filepath.Join(src, name), filepath.Join(l.Dst, name)); err != nil {
 			return fmt.Errorf("%s: %w", name, err)
+		}
+	}
+	for _, n := range nested {
+		from := filepath.Join(src, filepath.FromSlash(n.from))
+		if _, err := os.Stat(from); os.IsNotExist(err) {
+			continue
+		}
+		to := filepath.Join(l.Dst, filepath.FromSlash(n.to))
+		if err := os.MkdirAll(filepath.Dir(to), 0o755); err != nil {
+			return err
+		}
+		if err := l.link(from, to); err != nil {
+			return fmt.Errorf("%s: %w", n.to, err)
 		}
 	}
 	fmt.Fprintln(l.Out, "done.")

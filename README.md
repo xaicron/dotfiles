@@ -28,14 +28,9 @@ Existing symlinks are left as they are.
 
 - Every entry at the repository root whose name starts with `.` (except `.git`, `.gitignore`, `.gitmodules`, and a few others)
 - `bin/` (`$HOME/bin` is added to `PATH` in `.zshrc`)
+- `claude/CLAUDE.md` → `~/.claude/CLAUDE.md` (global instructions for Claude Code; `~/.claude` itself stays a real directory)
 
 See `internal/link/link.go` for the exact rules.
-
-`claude/CLAUDE.md` holds the global instructions for Claude Code. It is not linked by `task install`; link it by hand:
-
-```sh
-ln -s "$PWD/claude/CLAUDE.md" ~/.claude/CLAUDE.md
-```
 
 ## Tasks
 
